@@ -1,73 +1,147 @@
 #!/bin/bash
 
-#Define default directory
+#Define settings vars
 default_dir=($PWD)
-lab=1
+curr_dir=$default_dir
+lab=0
 q_num=6
-root_name="none"
-std="N"
+file_root="q_"
+folder_root="Q_"
+std="NO"
+dir=""
 
 #Define colors
-black='\e[0;30m' # Black - Regular
-red='\e[0;31m' # Red
-green='\e[0;32m' # Green
-yellow='\e[0;33m' # Yellow
-blue='\e[0;34m' # Blue
-purple='\e[0;35m' # Purple
-cyan='\e[0;36m' # Cyan
-white='\e[0;37m' # White
-bold=$(tput bold)
-RESET="\033[0m"
+black="$(tput setaf 0)"
+red="$(tput setaf 9)" 
+green="$(tput setaf 10)"
+yellow="$(tput setaf 11)" 
+blue="$(tput setaf 12)"
+purple="$(tput setaf 13)" 
+cyan="$(tput setaf 14)" 
+white="$(tput setaf 15)" 
+bold=$(tput bold) 
+RESET=$(tput reset) 
 
-clear
-echo -e "${green}${bold}This script will setup the folder structure for the lab. ${RESET}"
-echo -e "${red}${bold}WARNING: By default this will create a new directory in the same directory as setup.sh ($green$default_dir${red}${bold}) containing all created files!"
-read -p "-Press enter to continue-"
-echo 
+main(){
+    echo
+    read -p "Enter lab assignment #: " lab
+    while [ -z "$lab" ] 
+    do
+        read -p "Enter lab assignment #: " lab
+    done
 
-read -p "Enter lab assignment # (i.e 3): " lab
-while [ -z "$lab"] do
-    read -p "Enter lab assignment # (i.e 3): " lab
-done
+    #Check that location is free
+    dir=$curr_dir/Lab$lab
+    if [ -d $dir ] ; then
+        echo "${yellow}CAUTION: Folder $dir already exists."
+        read -n1 -p "${white}Would you like to delete it? (Y/N):" -i N delete
 
-echo -e "${yellow}Default values listed in ${green}${bold}green${yellow}${bold}."
-echo
-echo -e "${green}${bold}Leave entry empty for defaults${RESET}"
+        case $delete in
+        Y|y)   
+            echo
+            echo
+            echo "${red}WARNING: FILES WILL BE PERMANATELY DELETED!"
+            read -n1 -p "${white}Proceed with operation? (Y/N): " -i N delete2
+            echo
+            case $delete2 in
+            Y|y)
+                rm -r $dir
+                echo "${yellow}FILES DELETED!$white"
+                echo
+                ;;
+            esac
+            ;;
+        esac
+    else
+        mkdir $dir
+    fi;
 
-read -p "$(echo -e "($green$default_dir$RESET) Enter new root directory: ")" curr_dir
+    read -p "Enter number of lab questions: " q_num
+    while [ -z "$q_num" ] 
+    do
+        read -p "Enter number of lab questions: " q_num
+    done
 
-#Check if curr_dir is empty
-if [ -z "$curr_dir"] ; then
-    curr_dir = $default_dir
-fi
+    print_settings
+    echo -e "${white}"
+    read -n1 -p "$(echo -e "Proceed with following settings? (Y/N): ")" -i N settings
+    echo
 
-read -n1 -p "Enter # of lab questions (): " q_num
-read -p "Enter root filename. Leave empty for default ($root_name): " root_name
-read -n1 -p "() Include 'using namespace std' in template files? (Y/N): " std
-
-#Check if folders already exist
-if [ -d $curr_dir"/Lab$"lab ] ; then
-    echo -e "${yellow}CAUTION: Setup already done.${RESET}"
-    read -n1 -p "Would you like to rebuild? (Y/N):" choice
-fi;
-
-echo
-
-
-#Create new folder structure
-for i in `seq 1 6`; do
-    mkdir $i
-            
-    case $std in
-    "Y"|"y")
-        cp "resource/template_std.cpp" $i/$root$i.cpp        
+    case $settings in
+    N|n)
+        change_settings
+        print_settings
         ;;
-    *)
-        cp "resource/template.cpp" $i/$root$i.cpp
-        ;;
-
     esac
-done
+    dir=$curr_dir/Lab$lab/$folder_root
 
-#Move existing files if desired
-echo "Done!";
+    create_folders
+}
+
+print_fs_preview(){
+    echo "${cyan}File system preview:"
+    
+}
+
+print_settings(){
+    echo
+    echo "${cyan}Current Settings:"
+    echo "${yellow}Lab assignment #: $white[$green$lab$white]"
+    echo "${yellow}Number of lab questions: $white[$green$q_num$white]"
+    echo "${yellow}Question folder root name: $white[$green$folder_root$white]"
+    echo "${yellow}C++ file root name: $white[$green$file_root$white]"
+    echo "${yellow}Lab folder parent directory: $white[$green${curr_dir}$white]"
+    echo "${yellow}Include 'using namespace std' in template files: $white[${green}${std}$white]"
+}
+
+print_task_list(){
+    echo "${red}WARNING!: PROGRAM WILL PERFORM THE FOLLOWING TASKS"
+}
+
+change_settings(){
+    echo "${green}Leave entry empty for current value"
+
+    read -p "$(echo -e "${white}Enter lab assignment #: ")" -i $lab lab
+    read -p "Number of lab questions: " q_num
+    read -p "$(echo -e "($green$curr_dir) Lab folder parent directory: ")" -i $curr_dir curr_dir
+    read -p "Root filename: " -i $file_root file_root
+    read -n1 -p "$(echo -e "Include 'using namespace std' in template files? (Y/N): ")" -i $std std
+
+    #Check if folders already exist
+    if [ -d $curr_dir/Lab$lab ] ; then
+        echo "${yellow}CAUTION: Setup already done."
+        read -n1 -p "Would you like to rebuild? (Y/N):" choice
+    fi;
+}
+
+create_folders(){
+    #Create new folder structure
+    for i in `seq 1 $q_num`; do
+        dir_f=$dir$i
+        file_f=$file_root$i
+
+        mkdir $dir_f              
+        case $std in
+        "Y"|"y")
+            cp "resource/template_std.cpp" $dir_f/$file_f.cpp        
+            ;;
+        *)
+            cp "resource/template.cpp" $dir_f/$file_f.cpp
+            ;;
+
+        esac
+    done
+
+    #Move existing files if desired
+    echo "Done!";   
+}
+clear
+echo "${green}${bold}This script will setup the folder structure for lab assigments for CSE165."
+echo "$yellow"
+echo "By using this, you take responsibility for any dataloss caused from the usage of this software."
+echo "Any modifications to this script will not be supported. Have a nice day."
+echo
+echo "CSE165-LabTools (C) 2022 Nathan Estrada UC Merced CSE165"
+echo "$white"
+read -p "-Press enter to continue-"
+main

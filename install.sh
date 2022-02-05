@@ -13,12 +13,12 @@ white="$(tput setaf 15)"
 bold=$(tput bold) 
 RESET=$(tput reset) 
 
-echo Hello
+
 
 #Define GitHub root
 source=https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master
- 
-mkdir resource
-wget -qO resource/t.cpp $source/resource/t.cpp
-wget -qO resource/t_std.cpp $source/resource/t_std.cpp
-wget -qO lab_gen.sh $source/lab_gen.sh
+
+mkdir LabTools
+cd LabTools
+git clone https://github.com/CybrNight/CSE165-LabTools.git .
+chmod +x lab_gen.sh

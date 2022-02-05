@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#Define GitHub root
-source=https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master
-
 #Define settings vars
 default_dir=($PWD)
 curr_dir=$default_dir
@@ -35,7 +32,7 @@ main(){
         build_new_lab
         ;;
     2)
-        wget -O - $source/setup.sh | bash
+        wget -O - $source/setup.sh | sudo bash
         ;;
     3)
         clear
@@ -64,7 +61,7 @@ print_credits(){
 print_menu(){
     printf "${purple}${bold}CSE165-LabTools\n\n"
     printf "1. Generate lab folders\n"
-    printf "2. Update version\n"
+    printf "2. Update version (must run as root)\n"
     printf "3. Credits\n"
     printf "4. Quit\n"
 }

@@ -3,8 +3,8 @@
 #Define settings vars
 default_dir=($PWD)
 curr_dir=$default_dir
-lab=0
-q_num=6
+lab=-1
+q_num=-1
 file_root="q_"
 folder_root="Q_"
 std="NO"
@@ -23,39 +23,65 @@ bold=$(tput bold)
 RESET=$(tput reset) 
 
 main(){
-    echo
+    print_menu
+    read -n1 -p "$white" menu_select
+    case $menu_select in
+    1)
+        clear
+        build_new_lab
+        ;;
+    2)
+        #Do Update
+        printf "This should do update"
+        ;;
+    3)
+        clear
+        print_credits
+        clear
+        main
+        ;;
+    4)
+        clear
+        exit 1
+        ;;
+    esac
+}
+
+
+
+print_credits(){
+    printf  "${yellow}CSE165-LabTools (C) 2022 Nathan Estrada\n" 
+    printf  "Automatically builds the folder structure for CSE165 labs\n\n"
+    printf  "By using this, you take responsibility for any dataloss caused from the usage of this software.\n"
+    printf  "Any modifications to this script will not be supported. Have a nice day.\n"
+    read -p "${white}-Press enter to continue-"
+}
+
+print_menu(){
+    printf "${purple}${bold}CSE165-LabTools\n\n"
+    printf "1. Generate lab folders\n"
+    printf "2. Update setup\n"
+    printf "3. Credits\n"
+    printf "4. Quit\n"
+}
+
+build_new_lab(){
+    printf "${green}---Lab Folder Generator---\n\n"
+
+    printf "${yellow}CAUTION:By default the new lab directory is created in the same directory as this script.\n"
+    printf ".\n\n$white"
+
+    #Get lab number
     read -p "Enter lab assignment #: " lab
-    while [ -z "$lab" ] 
+    while [ $lab -le -1 ] 
     do
-        read -p "Enter lab assignment #: " lab
+        read -N2 -p "Enter lab assignment #: " lab
     done
 
     #Check that location is free
-    dir=$curr_dir/Lab$lab
-    if [ -d $dir ] ; then
-        echo "${yellow}CAUTION: Folder $dir already exists."
-        read -n1 -p "${white}Would you like to delete it? (Y/N):" -i N delete
+    check_free
 
-        case $delete in
-        Y|y)   
-            echo
-            echo
-            echo "${red}WARNING: FILES WILL BE PERMANATELY DELETED!"
-            read -n1 -p "${white}Proceed with operation? (Y/N): " -i N delete2
-            echo
-            case $delete2 in
-            Y|y)
-                rm -r $dir
-                echo "${yellow}FILES DELETED!$white"
-                echo
-                ;;
-            esac
-            ;;
-        esac
-    else
-        mkdir $dir
-    fi;
-
+    #Get number of lab questions
     read -p "Enter number of lab questions: " q_num
     while [ -z "$q_num" ] 
     do
@@ -63,8 +89,8 @@ main(){
     done
 
     print_settings
-    echo -e "${white}"
-    read -n1 -p "$(echo -e "Proceed with following settings? (Y/N): ")" -i N settings
+    printf  "${white}"
+    read -n1 -p "$(printf "Proceed with following settings? (Y/N): ")" -i N settings
     echo
 
     case $settings in
@@ -79,38 +105,60 @@ main(){
 }
 
 print_fs_preview(){
-    echo "${cyan}File system preview:"
+    printf "${cyan}File system preview:"
     
 }
 
 print_settings(){
-    echo
-    echo "${cyan}Current Settings:"
-    echo "${yellow}Lab assignment #: $white[$green$lab$white]"
-    echo "${yellow}Number of lab questions: $white[$green$q_num$white]"
-    echo "${yellow}Question folder root name: $white[$green$folder_root$white]"
-    echo "${yellow}C++ file root name: $white[$green$file_root$white]"
-    echo "${yellow}Lab folder parent directory: $white[$green${curr_dir}$white]"
-    echo "${yellow}Include 'using namespace std' in template files: $white[${green}${std}$white]"
+    printf "${cyan}Current Settings:\n"
+    printf "${yellow}Lab assignment #: $white[$green$lab$white]\n"
+    printf "${yellow}Number of lab questions: $white[$green$q_num$white]\n"
+    printf "${yellow}Question folder root name: $white[$green$folder_root$white]\n"
+    printf "${yellow}C++ file root name: $white[$green$file_root$white]\n"
+    printf "${yellow}Lab folder parent directory: $white[$green${curr_dir}$white]\n"
+    printf "${yellow}Include 'using namespace std' in template files: $white[${green}${std}$white]\n"
 }
 
 print_task_list(){
-    echo "${red}WARNING!: PROGRAM WILL PERFORM THE FOLLOWING TASKS"
+    printf "${red}WARNING!: PROGRAM WILL PERFORM THE FOLLOWING TASKS"
 }
 
 change_settings(){
-    echo "${green}Leave entry empty for current value"
+    printf "${green}Leave entry empty for current value"
 
-    read -p "$(echo -e "${white}Enter lab assignment #: ")" -i $lab lab
+    read -p "$(printf -e "${white}Enter lab assignment #: ")" -i $lab lab
     read -p "Number of lab questions: " q_num
-    read -p "$(echo -e "($green$curr_dir) Lab folder parent directory: ")" -i $curr_dir curr_dir
+    read -p "$(printf -e "($green$curr_dir) Lab folder parent directory: ")" -i $curr_dir curr_dir
     read -p "Root filename: " -i $file_root file_root
-    read -n1 -p "$(echo -e "Include 'using namespace std' in template files? (Y/N): ")" -i $std std
+    read -n1 -p "$(printf -e "Include 'using namespace std' in template files? (Y/N): ")" -i $std std
+    echo
 
     #Check if folders already exist
-    if [ -d $curr_dir/Lab$lab ] ; then
-        echo "${yellow}CAUTION: Setup already done."
-        read -n1 -p "Would you like to rebuild? (Y/N):" choice
+    check_free
+}
+
+check_free(){
+     dir=$curr_dir/Lab$lab
+    if [ -d $dir ] ; then
+        printf "${yellow}CAUTION: Folder $dir already exists.\n"
+        read -n1 -p "${white}Would you like to delete it? (Y/N):" -i N delete
+        echo
+
+        case $delete in
+        Y|y)   
+            printf  "\n\n${red}WARNING: FILES WILL BE PERMANATELY DELETED!\n"
+            read -n1 -p "${white}Proceed with operation? (Y/N): " -i N delete2
+            echo
+            case $delete2 in
+            Y|y) 
+                rm -r $dir #Delete lab directory
+                printf  "${yellow}FILES DELETED!$white\n"
+                ;;
+            esac
+            ;;
+        esac
+    else
+        mkdir $dir #Make lab directory
     fi;
 }
 
@@ -133,15 +181,7 @@ create_folders(){
     done
 
     #Move existing files if desired
-    echo "Done!";   
+    printf "Done!\n";   
 }
 clear
-echo "${green}${bold}This script will setup the folder structure for lab assigments for CSE165."
-echo "$yellow"
-echo "By using this, you take responsibility for any dataloss caused from the usage of this software."
-echo "Any modifications to this script will not be supported. Have a nice day."
-echo
-echo "CSE165-LabTools (C) 2022 Nathan Estrada UC Merced CSE165"
-echo "$white"
-read -p "-Press enter to continue-"
 main

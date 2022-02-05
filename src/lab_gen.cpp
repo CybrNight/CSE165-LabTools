@@ -1,8 +1,11 @@
+#include <lab_gen.h>
+#include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <string>
+#include <unistd.h>
+
 #include <iostream>
-#include <lab_gen.h>
+#include <string>
 
 Lab::Lab() {
     labNum = 1;
@@ -29,7 +32,7 @@ void Lab::printFSLayout(){
     }
 
     for (int i = 1; i <= max; i++) {
-        std::cout << "├─ " << i << " /\n";
+        std::cout << "├─ " << fiPrefix << i << " /\n";
     }
     std::cout << qNum-max << " more rows left.\n";
 }
@@ -58,7 +61,7 @@ void buildLab(Lab* lab) {
     std::cout << "\n";
     
     do{
-        std::cout << "Continue with current settings? (Y/N): ";
+        std::cout << "Continue with optimized defaults? (Y/N): ";
         std::cin >> choice;
         choice = std::tolower(choice);
     }while (choice != 'y' && choice != 'n');
@@ -83,7 +86,7 @@ void buildLab(Lab* lab) {
 
 
 void generateFolders(){
-
+    //std::mkdir();
 }
 
 void checkEmpty(std::string path){

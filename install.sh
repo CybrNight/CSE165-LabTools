@@ -21,5 +21,6 @@ do
 case $flag in
     i) install ;;
     u) update ;;
+    *) printf "Usage: ./install.sh -i | -u" ;;
     esac
 done   

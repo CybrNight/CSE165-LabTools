@@ -7,11 +7,5 @@ This software should be perfectly safe to use in all contexts. Howeverm, failure
 # Usage
 Clone most recent version of repo and run `setup.sh` 
 
-**Git**
-```bash
-git clone "https://github.com/CybrNight/CSE165-LabTools.git"
-```
-**GitHub CLI**
-```
-gh repo clone CybrNight/CSE165-LabTools
-```
+# Installation
+sudo wget -O - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | sudo bash

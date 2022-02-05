@@ -7,3 +7,24 @@ BDIR = bin
 SDIR = src
 
 PROGRAM = app
+
+H_FILES := $(wildcard $(IDIR)/*.h)
+
+SRC_FILES := $(wildcard $(SDIR)/*.cpp)
+OBJ := $(patsubst $(SDIR)/%.cpp,$(ODIR)/%.o,$(SRC_FILES))
+
+NEEDED_FILES := $(filter-out $(SDIR)/app.cpp, $(SRC_FILES))
+
+$(ODIR)/%.o: $(SDIR)/%.cpp $(H_FILES) $(DEPS)
+	$(CC) -c -o $@ $< $(CFLAGS)
+
+$(PROGRAM): $(OBJ) 
+	$(CC) $^ -o $(BDIR)/$@ $(CFLAGS)
+
+run:
+	./bin/app
+
+clean:
+	$(RM) $(BDIR)/*
+	$(RM) $(ODIR)/*.o
+	$(RM) $(PDIR)/$(ODIR)/*.o

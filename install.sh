@@ -20,5 +20,5 @@ cd LabTools
  
 mkdir template
 wget -qO resource/t.cpp $source/t.cpp
-wget -qO resource/t_std.cpp $sourcet_std.cpp
+wget -qO resource/t_std.cpp $source/t_std.cpp
 wget -qO lab_gen.sh $source/lab_gen.sh

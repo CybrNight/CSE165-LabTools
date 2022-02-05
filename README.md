@@ -8,4 +8,6 @@ This software should be perfectly safe to use in all contexts. Howeverm, failure
 Clone most recent version of repo and run `setup.sh` 
 
 # Installation
+```bash
 sudo wget -O - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | sudo bash
+```

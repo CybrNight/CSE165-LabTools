@@ -1,5 +1,5 @@
 #!/bin/bash
-#sudo wget -O - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | sudo bash
+#sudo wget -qO - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | sudo bash
 
 #Define GitHub root
 source=https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master
@@ -22,7 +22,7 @@ RESET=$(tput reset)
 
 mkdir LabTools
 cd LabTools
- 
+
 mkdir template
 wget -qO template/t.cpp $source/t.cpp
 wget -qO template/t_std.cpp $source/t_std.cpp

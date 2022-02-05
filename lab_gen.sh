@@ -172,10 +172,10 @@ create_folders(){
         mkdir $dir_f              
         case $std in
         "Y"|"y")
-            cp "resource/template_std.cpp" $dir_f/$file_f.cpp        
+            cp "template/t.cpp" $dir_f/$file_f.cpp        
             ;;
         *)
-            cp "resource/template.cpp" $dir_f/$file_f.cpp
+            cp "template/t_std.cpp" $dir_f/$file_f.cpp
             ;;
 
         esac

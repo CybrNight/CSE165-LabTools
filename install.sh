@@ -30,4 +30,4 @@ wget -qO lab_gen.sh $source/lab_gen.sh
 chmod +x lab_gen.sh
 
 echo Installed!
-printf Navigate to LabTools folder and use "./lab_gen.sh"
+printf "Navigate to LabTools folder and use ./lab_gen.sh"

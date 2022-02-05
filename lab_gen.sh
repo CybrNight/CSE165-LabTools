@@ -3,11 +3,23 @@
 #Define settings vars
 default_dir=($PWD)
 curr_dir=$default_dir
+temp_dir=""
+
 lab=-1
+temp_lab=$default_dir
+
 q_num=-1
+temp_q=-1
+
 file_root="q_"
+temp_file="q_"
+
 folder_root="Q_"
+temp_folder="Q_"
+
 std="NO"
+temp_std="NO"
+
 dir=""
 
 #Define colors
@@ -127,19 +139,27 @@ print_task_list(){
 change_settings(){
     printf "${green}Leave entry empty for current value"
 
-    read -p "$(echo -e "${white}Enter lab assignment #: ")" -i $lab lab
-    read -p "Number of lab questions: " q_num
-    read -p "$(echo -e "($green$curr_dir) Lab folder parent directory: ")" -i $curr_dir curr_dir
-    read -p "Root filename: " -i $file_root file_root
-    read -n1 -p "$(echo -e "Include 'using namespace std' in template files? (Y/N): ")" -i $std std
+    read -p "$(echo -e "${white}Enter lab assignment #: ")" -i $temp_lab lab
+    read -p "Number of lab questions: " -i $temp_q q_num
+    read -p "$(echo -e "($green$curr_dir) Lab folder parent directory: ")" -i $temp_dir curr_dir
+    read -p "Folder root filename: " -i $temp_folder folder_root
+    read -p "C++ file root name: " -i $temp_file file_root
+    read -n1 -p "$(echo -e "Include 'using namespace std' in template files? (Y/N): ")" -i $temp_std std
     echo
+
+    temp_lab=$lab
+    temp_q=$q_num
+    temp_folder=$folder_root
+    temp_file=$file_root
+    temp_dir=$dir
+    temp_std=$std
 
     #Check if folders already exist
     check_free
 }
 
 check_free(){
-     dir=$curr_dir/Lab$lab
+    dir=$curr_dir/Lab$lab
     if [ -d $dir ] ; then
         printf "${yellow}CAUTION: Folder $dir already exists.\n"
         read -n1 -p "${white}Would you like to delete it? (Y/N):" -i N delete
@@ -150,7 +170,7 @@ check_free(){
             printf  "\n\n${red}WARNING: FILES WILL BE PERMANATELY DELETED!\n"
             read -n1 -p "${white}Proceed with operation? (Y/N): " -i N delete2
             echo
-            case $delete2 in
+             case $delete2 in
             Y|y) 
                 rm -r $dir #Delete lab directory
                 printf  "${yellow}FILES DELETED!$white\n"

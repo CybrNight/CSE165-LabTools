@@ -9,5 +9,5 @@ Clone most recent version of repo and run `setup.sh`
 
 # Installation
 ```bash
-wget -O - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | bash
+wget -qO - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | bash
 ```

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Define GitHub root
+source=https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master
+
 #Define settings vars
 default_dir=($PWD)
 curr_dir=$default_dir
@@ -22,17 +25,21 @@ white="$(tput setaf 15)"
 bold=$(tput bold) 
 RESET=$(tput reset) 
 
+init(){
+    echo
+}
+
 main(){
     print_menu
     read -n1 -p "$white" menu_select
+    echo
     case $menu_select in
     1)
         clear
         build_new_lab
         ;;
     2)
-        #Do Update
-        printf "This should do update"
+        wget -O setup.sh $source/setup.sh
         ;;
     3)
         clear
@@ -50,17 +57,18 @@ main(){
 
 
 print_credits(){
-    printf  "${yellow}CSE165-LabTools (C) 2022 Nathan Estrada\n" 
-    printf  "Automatically builds the folder structure for CSE165 labs\n\n"
-    printf  "By using this, you take responsibility for any dataloss caused from the usage of this software.\n"
-    printf  "Any modifications to this script will not be supported. Have a nice day.\n"
+    printf "${yellow}CSE165-LabTools (C) 2022 Nathan Estrada\n" 
+    printf "Automatically builds the folder structure for CSE165 labs\n\n"
+    printf "By using this software, you take responsibility for any data loss caused from the usage of this software.\n"
+    printf "Failure to read/understand warnings may result in data loss."
+    printf "Any modifications to this script will not be supported. Have a nice day.\n\n"
     read -p "${white}-Press enter to continue-"
 }
 
 print_menu(){
     printf "${purple}${bold}CSE165-LabTools\n\n"
     printf "1. Generate lab folders\n"
-    printf "2. Update setup\n"
+    printf "2. Update script\n"
     printf "3. Credits\n"
     printf "4. Quit\n"
 }
@@ -184,4 +192,5 @@ create_folders(){
     printf "Done!\n";   
 }
 clear
+init
 main

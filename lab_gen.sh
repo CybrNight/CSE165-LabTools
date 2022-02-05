@@ -24,7 +24,7 @@ RESET=$(tput reset)
 
 main(){
     print_menu
-    read -n1 -p "$white" menu_select
+    read -p "$white" menu_select
     echo
     case $menu_select in
     1)
@@ -76,7 +76,7 @@ build_new_lab(){
     read -p "Enter lab assignment #: " lab
     while [ $lab -le -1 ] 
     do
-        read -N2 -p "Enter lab assignment #: " lab
+        read -p "Enter lab assignment #: " lab
     done
 
     #Check that location is free
@@ -127,11 +127,11 @@ print_task_list(){
 change_settings(){
     printf "${green}Leave entry empty for current value"
 
-    read -p "$(printf -e "${white}Enter lab assignment #: ")" -i $lab lab
+    read -p "$(echo -e "${white}Enter lab assignment #: ")" -i $lab lab
     read -p "Number of lab questions: " q_num
-    read -p "$(printf -e "($green$curr_dir) Lab folder parent directory: ")" -i $curr_dir curr_dir
+    read -p "$(echo -e "($green$curr_dir) Lab folder parent directory: ")" -i $curr_dir curr_dir
     read -p "Root filename: " -i $file_root file_root
-    read -n1 -p "$(printf -e "Include 'using namespace std' in template files? (Y/N): ")" -i $std std
+    read -n1 -p "$(echo -e "Include 'using namespace std' in template files? (Y/N): ")" -i $std std
     echo
 
     #Check if folders already exist
@@ -158,9 +158,8 @@ check_free(){
             esac
             ;;
         esac
-    else
-        mkdir $dir #Make lab directory
     fi;
+    mkdir $dir #Make lab directory
 }
 
 create_folders(){

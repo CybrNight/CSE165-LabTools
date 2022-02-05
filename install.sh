@@ -28,3 +28,6 @@ wget -qO template/t.cpp $source/t.cpp
 wget -qO template/t_std.cpp $source/t_std.cpp
 wget -qO lab_gen.sh $source/lab_gen.sh
 chmod +x lab_gen.sh
+
+echo Installed!
+printf Navigate to LabTools folder and use "./lab_gen.sh"

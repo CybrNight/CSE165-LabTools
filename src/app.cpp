@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include <string>
 
 void printMenu();
 void printCredits();
-void printSettings();
 
 int main() {
-
+    
 }
 
 void printMenu(){
-    cout << ""
+    std::cout << "HELLO THERE" << std::endl;
 }

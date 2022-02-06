@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <iostream>
 #include <string>
-#include <bits/stdc++.h>
+#include <algorithm>
 #include <filesystem>
 #include <ctype.h>
 

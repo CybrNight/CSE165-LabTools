@@ -8,6 +8,7 @@ git clone https://github.com/CybrNight/CSE165-LabTools.git
 
 make CSE165-LabTools/Makefile
 cp CSE165-LabTools/bin/lab_tools lab_tools
+sudo chmod +x lab_tools
 
 echo Finished building!
 rm -r CSE165-LabTools

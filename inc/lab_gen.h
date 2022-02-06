@@ -7,16 +7,16 @@
 struct Lab {
     int labNum;
     int qNum;
-    std::string fiPrefix;
-    std::string dir;
+    std::string prefix;
+    std::string pDir;
+    std::string dirPath;
     std::string tmplate;
 
     Lab();
     void printDetails();
     void printFSLayout();
+    int generateFolders();
+    bool isDestEmpty();
 };
-
-void buildLab(Lab* lab);
-void checkEmpty(std::string path);
 
 #endif

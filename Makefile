@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Iinc -Idep -w -std=c++14
+CFLAGS = -Iinc -Idep -w -std=c++17
 
 IDIR = inc
 ODIR = obj

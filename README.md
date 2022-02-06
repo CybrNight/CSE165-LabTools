@@ -6,10 +6,11 @@ Let's hope the professor lets me implement this so we don't end up with 2 hour d
 # Features
 
 # Installation
-### Alternative Bleeding Edge Installation
+### Linux/MacOS auto-install
 ```bash
 sudo wget -qO - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | sudo bash
 ```
+Precompiled binaries for Windows/Linux in [release](https://github.com/CybrNight/CSE165-LabTools/releases) tab.
 
 # Buidling
 

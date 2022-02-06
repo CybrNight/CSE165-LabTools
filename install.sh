@@ -8,8 +8,8 @@ mkdir CSE165-LabTools
 git clone https://github.com/CybrNight/CSE165-LabTools.git temp
  
 make temp/Makefile
-cp /temp/bin/lab_tools CSE165-LabTools/lab_tools
-cp -r /temp/res/ /CSE165-LabTools
+cp temp/bin/lab_tools CSE165-LabTools/lab_tools
+cp -r temp/res/ CSE165-LabTools
 
 echo Finished building!
 rm -r CSE165-LabTools

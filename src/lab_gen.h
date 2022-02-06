@@ -3,22 +3,18 @@
 
 #include <string>
 #include <iostream>
-#include <filesystem>
-
-namespace fs = std::filesystem;
 
 struct Lab {
     int labNum;
     int qNum;
     std::string prefix;
-    fs::path pDir;
-    fs::path dirPath;
-    fs::path tmplate;
+    std::string pDir;
+    std::string dirPath;
+    std::string tmplate;
 
     Lab();
     void printDetails();
     void printFSLayout();
-    void setLabNum(int num);
     int generateFolders();
     bool isDestEmpty();
 };

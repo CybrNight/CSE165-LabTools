@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -Iinc -Idep -w -std=c++17
+CFLAGS = -Iinc -w -std=c++17 -static-libgcc -static-libstdc++
 
 IDIR = inc
 ODIR = obj
@@ -22,6 +22,9 @@ $(ODIR)/%.o: $(SDIR)/%.cpp $(H_FILES) $(DEPS)
 
 $(PROGRAM): $(OBJ) 
 	$(CC) $^ -o $(BDIR)/$@ $(CFLAGS)
+
+win:
+	x86_64-w64-mingw32-g++ -std=c++17 src/app.cpp src/lab_gen.cpp -o bin/appwin -I inc -static-libgcc -static-libstdc++
 
 run:
 	./bin/app

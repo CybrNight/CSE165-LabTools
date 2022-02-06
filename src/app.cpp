@@ -1,12 +1,11 @@
 #include <lab_gen.h>
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <cstdlib>
 #include <iostream>
 #include <string>
 #include <bits/stdc++.h>
 #include <filesystem>
+#include <ctype.h>
 
 
 void mainMenu();
@@ -25,7 +24,13 @@ void mainMenu(){
 
     printMenu();
     std::cin >> choice;
+
+#ifdef OS_WINDOWS
+    std::system("cls");
+#else
     std::system("clear");
+#endif
+
 
     Lab* lab;
 
@@ -44,13 +49,23 @@ void buildLab(Lab* lab) {
 
     std::cout << "---Lab Folder Generator---\n\n";
 
+#ifndef _WIN32
     std::cout << "Generate folder structure with the following format:\n";
     std::cout << "Lab" << lab->labNum
               << "/\n"
-                 "├─ 1 /\n"
-                 "├─ 2 /\n"
-                 "├─ 3 /\n"
-                 "├─ 4 /\n\n";
+                 "|-- 1/\n"
+                 "|-- 2/\n"
+                 "|-- 3/\n"
+                 "|-- 4/\n\n";
+#else
+    std::cout << "Generate folder structure with the following format:\n";
+    std::cout << "Lab" << lab->labNum
+              << "/\n"
+                 "├─ 1/\n"
+                 "├─ 2/\n"
+                 "├─ 3/\n"
+                 "├─ 4/\n\n";
+#endif
 
     // Initialize lab object
     std::cout << "Enter lab number: ";

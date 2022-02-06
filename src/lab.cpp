@@ -11,11 +11,22 @@ namespace fs = std::filesystem;
 
 //Lab struct constructor
 Lab::Lab() {
+    prefix = "N/A";
+    usePrefix = false;
+    useTemplate = true;
     setLabNum(1);
     setPDir(fs::current_path().u8string());
     tPath = fs::current_path().u8string() + "/res/t.cpp";
+
+    if (!fs::exists(tPath)){
+        tPath = "N/A";
+    }
+
+    if (!usePrefix){
+        prefix = "N/A";
+    }
+
     qNum = 1;
-    prefix = "";
 }
 
 fs::path Lab::getTemplate(){
@@ -45,12 +56,16 @@ void Lab::updateFullPath(){
 }
 
 void Lab::printDetails() {
-
+    std::cout << "Lab" << labNum << " Settings:\n";
     std::cout << "Lab number:[" << labNum << "]\n";
     std::cout << "Number of questions:[" << qNum << "]\n";
-    std::cout << "File prefix:[" << prefix << "]\n";
-    std::cout << "Directory:[" << pDir.u8string() << "/Lab" << labNum << "]\n";
-    std::cout << "Template file:[" << tPath << "]\n";
+    std::cout << "Desination directory:[" << pDir.u8string() << "/Lab" << labNum << "]\n\n";
+
+    std::cout << "Use file prefix:[" << std::boolalpha << usePrefix << "]\n";
+    std::cout << "File prefix:[" << prefix << "]\n\n";
+
+    std::cout << "Use template file:[" << std::boolalpha << useTemplate << "]\n";
+    std::cout << "Template file:[" << tPath.u8string() << "]\n";
 }
 
 void Lab::printFSLayout(){
@@ -79,16 +94,26 @@ bool Lab::isDestEmpty(){
     return fs::exists(fullPath);
 }
 
-int Lab::generateFolders(bool useTmplate) {
+int Lab::generateFolders() {
     char choice;
+    std::string qPath;
 
-    fs::create_directory(fullPath);
-
-    for (int i = 1; i <= qNum; i++){
-        std::string qPath = fullPath.u8string() + "/" + prefix + std::to_string(i);
+    for (int i = 1; i <= qNum; i++) {
+        qPath = fullPath.u8string() + "/" + std::to_string(i);
         fs::create_directory(qPath);
-        if (useTmplate){
-            fs::copy(tPath, qPath+"/"+prefix+std::to_string(i)+".cpp");
+
+
+        //Add prefix to qPath if required
+        if (usePrefix){
+            qPath += "/" + prefix + std::to_string(i) + ".cpp";
+        }else{
+            qPath += "/" + std::to_string(i) + ".cpp";
+        }
+
+        if (useTemplate && tPath.compare("N/A") != 0){
+            fs::copy(tPath, qPath);
+        } else if (tPath.compare("N/A") == 0) {
+            std::cout << "NO TEMPLATE FILE SPECIFIED! SKIPPING STEP!\n";
         }
     }
 

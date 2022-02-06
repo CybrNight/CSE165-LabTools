@@ -12,6 +12,9 @@ class Lab {
     int labNum;
     int qNum;
 
+    bool usePrefix;
+    bool useTemplate;
+
     std::string prefix; //C++ file prefix
     fs::path pDir; //Parent directory of lab folder
     fs::path fullPath; //Dirpath is controlled by lab num and p dir
@@ -21,7 +24,7 @@ class Lab {
         Lab();
         void printDetails(); //Print all details
         void printFSLayout(); //Print filesystem layout
-        int generateFolders(bool useTemplate); //Generates all folders for lab
+        int generateFolders(); //Generates all folders for lab
         bool isDestEmpty(); //Checks if lab's location is taken
 
         void setLabNum(int labNum);

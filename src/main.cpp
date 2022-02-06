@@ -52,22 +52,29 @@ void buildLab(Lab* lab) {
 
     std::cout << "---Lab Folder Generator---\n\n";
 
+    std::string intro =
+        "Generates lab project folder with the following structure\n";
+
 #ifdef _WIN32
-    std::cout << "Generate folder structure with the following format:\n";
+        std::cout
+        << welcome;
     std::cout << "Lab#"
               << "/\n"
                  "|-- 1/\n"
                  "|-- 2/\n"
                  "|-- 3/\n"
-                 "|-- 4/\n\n";
+                 "|-- 4/\n";
 #else
-    std::cout << "Generate folder structure with the following format:\n";
+        std::cout
+        << intro;
     std::cout << "Lab#"
               << "/\n"
                  "├─ 1/\n"
                  "├─ 2/\n"
                  "├─ 3/\n"
-                 "├─ 4/\n\n";
+                 "├─ 4/\n";
+
+    std::cout << "..." << "\n\n";
 #endif
 
     // Initialize lab object
@@ -83,7 +90,9 @@ void buildLab(Lab* lab) {
 
     lab->setLabNum(labNum);
 
+    //Check if destination exists, if it does ask to delete it
     std::string delOpt;
+    char confirmDel;
     if (lab->isDestEmpty()) {
         std::cout << "Destination path (" << lab->getFullPath()
                   << ") already exists.\n";
@@ -99,9 +108,23 @@ void buildLab(Lab* lab) {
         transform(delOpt.begin(), delOpt.end(), delOpt.begin(), ::tolower);
 
         if (delOpt.compare("d") || delOpt.compare("delete")) {
-            std::uintmax_t n = fs::remove_all(lab->getFullPath());
-            std::cout << "Deleted Lab" << labNum << " folder + " << n
-                      << " files.\n\n";
+            std::cout << "\nWARNING!!! DIRECTORY " << lab->getFullPath() << " "
+            "WILL BE PERMANATELY DELETED!\n Are you sure? (Y/N): ";
+            std::cin >> confirmDel;
+
+            while (std::cin.fail()){
+                std::cout << "Choose valid option!\n";
+                cleanCin();
+                std::cin >> confirmDel;
+            }
+
+            confirmDel = std::tolower(confirmDel);
+
+            if (confirmDel == 'y'){
+                std::uintmax_t n = fs::remove_all(lab->getFullPath());
+                std::cout << "Deleted directory " << lab->getFullPath() << " folder containing " << n
+                        << " files.\n\n";
+            }
         } else {
             exit(EXIT_SUCCESS);
         }
@@ -145,16 +168,8 @@ void buildLab(Lab* lab) {
     }
 
     // Print out plan for program for user to agree
-    char t;
-    do {
-        std::cout
-            << "Would you like to copy the template C++ file to all folders? ("
-            << lab->getTemplate().u8string() << ") (Y/N): ";
-        std::cin >> t;
-        t = std::tolower(t);
-    } while (t != 'y' && t != 'n');
 
-    lab->generateFolders(t == 'y');
+    lab->generateFolders();
 }
 
 void printMenu(){

@@ -1,5 +1,5 @@
 CC = g++
-CFLAGS = -I inc -std=c++17 -o bin/lab_tools -static-libgcc -static-libstdc++
+CFLAGS = -I inc -std=c++17 -o bin/lab_tools
 CFLAGSD = -I inc -std=c++17 -g -o appdebug -static-libgcc -static-libstdc++
 CFLAGS_WIN = -std=c++17 -o /mnt/c/users/naest/Desktop -I inc -static-libgcc -static-libstdc++
 

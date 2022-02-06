@@ -28,4 +28,7 @@ cp bin/lab_tools lab_tools
 cd ..
 
 echo Finished!
+
+rm -r CSE165-LabTools
+
 echo Run lab_tools binary.

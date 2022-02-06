@@ -1,4 +1,4 @@
-#include <lab_gen.h>
+#include <lab.h>
 #include <limits.h>
 #include <stdio.h>
 #include <stdlib.h>

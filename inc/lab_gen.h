@@ -7,20 +7,34 @@
 
 namespace fs = std::filesystem;
 
-struct Lab {
+class Lab {
+    
     int labNum;
     int qNum;
-    std::string prefix;
-    fs::path pDir;
-    fs::path dirPath;
-    fs::path tmplate;
 
-    Lab();
-    void printDetails();
-    void printFSLayout();
-    void setLabNum(int num);
-    int generateFolders();
-    bool isDestEmpty();
+    std::string prefix; //C++ file prefix
+    fs::path pDir; //Parent directory of lab folder
+    fs::path fullPath; //Dirpath is controlled by lab num and p dir
+    fs::path tPath; //Template C++ file that will be used for creation
+
+    public:
+        Lab();
+        void printDetails(); //Print all details
+        void printFSLayout(); //Print filesystem layout
+        int generateFolders(bool useTemplate); //Generates all folders for lab
+        bool isDestEmpty(); //Checks if lab's location is taken
+
+        void setLabNum(int labNum);
+        void setQNum(int labNum);
+        void setPDir(std::string pDir); //Set parent directory and update full path
+        void updateFullPath(); //Builds final path pDir+labNum and saves to dirPath
+        void setTemplate(std::string tPath);
+
+        int getLabNum();
+        int getQNum();
+        fs::path getPDir();
+        fs::path getFullPath();
+        fs::path getTemplate();
 };
 
 #endif

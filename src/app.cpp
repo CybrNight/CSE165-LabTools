@@ -12,6 +12,7 @@ void mainMenu();
 void printMenu();
 void printCredits();
 void buildLab(Lab* lab);
+void cleanCin();
 
 namespace fs = std::filesystem;
 
@@ -25,7 +26,7 @@ void mainMenu(){
     printMenu();
     std::cin >> choice;
 
-#ifdef OS_WINDOWS
+#ifdef _WIN32
     std::system("cls");
 #else
     std::system("clear");
@@ -45,13 +46,15 @@ void mainMenu(){
 }
 
 void buildLab(Lab* lab) {
-    char choice;
+    int labNum;
+    int qNum;
+    std::string templatePath;
 
     std::cout << "---Lab Folder Generator---\n\n";
 
-#ifndef _WIN32
+#ifdef _WIN32
     std::cout << "Generate folder structure with the following format:\n";
-    std::cout << "Lab" << lab->labNum
+    std::cout << "Lab#"
               << "/\n"
                  "|-- 1/\n"
                  "|-- 2/\n"
@@ -59,7 +62,7 @@ void buildLab(Lab* lab) {
                  "|-- 4/\n\n";
 #else
     std::cout << "Generate folder structure with the following format:\n";
-    std::cout << "Lab" << lab->labNum
+    std::cout << "Lab#"
               << "/\n"
                  "├─ 1/\n"
                  "├─ 2/\n"
@@ -69,54 +72,89 @@ void buildLab(Lab* lab) {
 
     // Initialize lab object
     std::cout << "Enter lab number: ";
-    std::cin >> lab->labNum;
+    std::cin >> labNum;
 
-    std::cout << "Enter question count: ";
-    std::cin >> lab->qNum;
+    //Keep asking until valid option given
+    while (std::cin.fail()){
+        std::cout << "Enter lab number: ";
+        cleanCin();
+        std::cin >> labNum;
+    }
 
-    std::cout << "\n";
-    std::cout << "\n";
+    lab->setLabNum(labNum);
 
-    lab->dirPath += "Lab" + std::to_string(lab->labNum);
-    std::string choice2;
-
-    //Check if folder already exists
-    if (lab->isDestEmpty()){
-        std::cout << "Destination path (" << lab->dirPath << ") already exists.\n";
+    std::string delOpt;
+    if (lab->isDestEmpty()) {
+        std::cout << "Destination path (" << lab->getFullPath()
+                  << ") already exists.\n";
         std::cout << "I)gnore\nD)elete\nA)bort\n";
-        std::cin >> choice2;
-        std::string choice2 = "";
-        transform(choice2.begin(), choice2.end(), choice2.begin(), ::tolower);
+        std::cin >> delOpt;
 
-        if (choice2.compare("d") || choice2.compare("delete")){
-            std::uintmax_t n = fs::remove_all(lab->dirPath);
-            std::cout << "Deleted Lab" << lab->labNum << " folder + " << n << " files.\n\n";
-        }else{
+        while (std::cin.fail()) {
+            std::cout << "Choose valid option!\n";
+            cleanCin();
+            std::cin >> delOpt;
+        }
+
+        transform(delOpt.begin(), delOpt.end(), delOpt.begin(), ::tolower);
+
+        if (delOpt.compare("d") || delOpt.compare("delete")) {
+            std::uintmax_t n = fs::remove_all(lab->getFullPath());
+            std::cout << "Deleted Lab" << labNum << " folder + " << n
+                      << " files.\n\n";
+        } else {
             exit(EXIT_SUCCESS);
         }
     }
 
+    std::cout << "Enter question count: ";
+
+    //Keep asking until valid option given
+    while (std::cin.fail()) {
+        std::cout << "Enter question count: ";
+        cleanCin();
+        std::cin >> labNum;
+    }
+
+    std::cin >> qNum;
+
+    std::cout << "\n";
+
+    //Check if folder already exists
+
+    lab->setQNum(qNum);
+
     lab->printDetails();
 
+    char defOpt;
     do {
         std::cout << "\nContinue with optimized defaults? (Y/N): ";
-        std::cin >> choice;
-        choice = std::tolower(choice);
-    } while (choice != 'y' && choice != 'n');
+        std::cin >> defOpt;
+        defOpt = std::tolower(defOpt);
+    } while (defOpt != 'y' && defOpt != 'n');
 
-    if (choice == 'n') {
+    if (defOpt == 'n') {
         std::cout << "Enter C++ file prefix: ";
-        std::cin >> lab->labNum;
+        std::cin >> labNum;
 
         std::cout << "Enter lab parent directory: ";
-        std::cin >> lab->qNum;
+        std::cin >> qNum;
 
         std::cout << "Enter path to template file: ";
-        std::cin >> lab->qNum;
+        std::cin >> templatePath;
     }
 
     // Print out plan for program for user to agree
-    lab->generateFolders();
+    char t;
+    do {
+        std::cout
+            << "Would you like to copy the template C++ file to all folders? ("
+            << lab->getTemplate().u8string() << ") (Y/N): ";
+        std::cin >> t;
+        t = std::tolower(t);
+    } while (t != 'y' && t != 'n');
+
+    lab->generateFolders(t == 'y');
 }
 
 void printMenu(){
@@ -126,4 +164,9 @@ void printMenu(){
     std::cout << "3. GitHub\n";
     std::cout << "4. Credits\n";
     std::cout << "5. Quit\n";
+}
+
+void cleanCin(){
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

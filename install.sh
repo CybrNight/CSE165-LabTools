@@ -5,14 +5,12 @@
 source=https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master
 
 git clone https://github.com/CybrNight/CSE165-LabTools.git
-cd CSE165-LabTools
 
-make
-cp bin/lab_tools lab_tools
-cd ..
+make CSE165-LabTools/Makefile
+cp CSE165-LabTools/bin/lab_tools lab_tools
 
-echo Finished!
-
+echo Finished building!
 rm -r CSE165-LabTools
-
+echo Removed source files!
+echo Finished!
 echo Run lab_tools binary.

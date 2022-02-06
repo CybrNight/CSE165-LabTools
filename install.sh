@@ -8,7 +8,8 @@ mkdir CSE165-LabTools
 git clone https://github.com/CybrNight/CSE165-LabTools.git temp
 
 # Build repo 
-make temp/Makefile release
+cd temp
+make release
 cp temp/bin/lab_tools CSE165-LabTools/lab_tools
 cp -r temp/res/ CSE165-LabTools/res
 rm -r temp

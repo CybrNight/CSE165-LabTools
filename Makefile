@@ -1,6 +1,6 @@
 CC = g++
-CFLAGS = -I inc -std=c++17 -o bin/lab_tools
-CFLAGSD = -I inc -std=c++17 -g -o bin/debug -static-libgcc -static-libstdc++
+CFLAGS = -I inc -std=c++17 -o lab_tools
+CFLAGSD = -I inc -std=c++17 -g -o debug -static-libgcc -static-libstdc++
 CFLAGS_WIN = -std=c++17 -o /mnt/c/users/naest/Desktop/appwin.exe -I inc -static-libgcc -static-libstdc++
 
 IDIR = inc
@@ -27,7 +27,7 @@ win:
 	x86_64-w64-mingw32-g++ $(NEEDED_FILES) $(CFLAGS_WIN)
 
 run:
-	./bin/app
+	./debug
 
 clean:
 	$(RM) $(BDIR)/*

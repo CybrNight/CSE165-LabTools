@@ -34,7 +34,9 @@ void Lab::printFSLayout(){
     for (int i = 1; i <= max; i++) {
         std::cout << "├─ " << fiPrefix << i << " /\n";
     }
-    std::cout << qNum-max << " more rows left.\n";
+    
+    if (qNum > 10)
+        std::cout << qNum-max << " more rows left.\n";
 }
 
 void buildLab(Lab* lab) {

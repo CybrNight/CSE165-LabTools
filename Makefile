@@ -9,7 +9,7 @@ BDIR = bin
 SDIR = src
 DDIR = dep
 
-PROGRAM = app
+PROGRAM = lab_tools
 
 H_FILES := $(wildcard $(IDIR)/*.h)
 DEPS := $(wildcard $(DDIR)/*.h)
@@ -21,11 +21,8 @@ NEEDED_FILES := $(filter-out $(SDIR)/app.cpp, $(SRC_FILES))
 CC = g++
 CC_WIN = x86_64-w64-mingw32-g++
 
-$(ODIR)/%.o: $(SDIR)/%.cpp $(H_FILES) $(DEPS)
-	$(CC) -c -o $@ $< $(CFLAGS)
-
-$(PROGRAM): $(OBJ) 
-	$(CC) $^ -o $(BDIR)/$@ $(CFLAGS)
+all:
+	$(CC) src/app.cpp src/lab_gen.cpp $(CFLAGS) 
 
 debug:
 	$(CC) src/app.cpp src/lab_gen.cpp $(CFLAGSD) 
@@ -34,7 +31,7 @@ win:
 	x86_64-w64-mingw32-g++ src/app.cpp src/lab_gen.cpp $(CFLAGS_WIN)
 
 run:
-	./bin/app
+	./bin/lab_tools
 
 clean:
 	$(RM) $(BDIR)/*

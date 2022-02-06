@@ -23,4 +23,7 @@ RESET=$(tput reset)
 git clone https://github.com/CybrNight/CSE165-LabTools.git
 cd CSE165-LabTools
 make
-cp bin/app ..
+cp bin/lab_tools ..
+
+echo Finished!
+echo Run lab_tools binary.

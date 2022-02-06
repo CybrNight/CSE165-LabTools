@@ -22,10 +22,10 @@ all:
 	$(CC) $(NEEDED_FILES) $(CFLAGS) 
 
 debug:
-	$(CC) src/app.cpp src/lab_gen.cpp $(CFLAGSD) 
+	$(CC) $(NEEDED_FILES) $(CFLAGSD) 
 
 win:
-	x86_64-w64-mingw32-g++ src/app.cpp src/lab_gen.cpp $(CFLAGS_WIN)
+	x86_64-w64-mingw32-g++ $(NEEDED_FILES) $(CFLAGS_WIN)
 
 run:
 	./bin/app

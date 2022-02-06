@@ -8,9 +8,9 @@ mkdir CSE165-LabTools
 git clone https://github.com/CybrNight/CSE165-LabTools.git temp
 
 # Build repo 
-make release temp/Makefile
+make temp/Makefile release
 cp temp/bin/lab_tools CSE165-LabTools/lab_tools
-cp -r temp/res/ CSE165-LabTools
+cp -r temp/res/ CSE165-LabTools/res
 rm -r temp
 
 echo Removed source files

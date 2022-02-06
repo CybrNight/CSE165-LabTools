@@ -5,7 +5,7 @@ CC_WIN = x86_64-w64-mingw32-g++
 #DAMN THAT'S A LOT OF ARGUMENTS
 CFLAGS_LINUX = -I inc -std=c++17 -o lab_tools
 CFLAGS_DEBUG = -I inc -std=c++17 -g -o debug -static-libgcc -static-libstdc++
-CFLAGS_WIN = -std=c++17 -o lab_tools.exe -I inc -lstdc++fs
+CFLAGS_WIN = -std=c++17 -o lab_tools.exe -I inc -lstdc++fsg
 
 IDIR = inc
 BDIR = bin

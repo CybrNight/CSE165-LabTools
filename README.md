@@ -1,5 +1,6 @@
 # CSE165-LabTools
-Personal tools for use during CSE165 lab assignments at UC Merced.
+Tools used for generating lab structure and grading labs for CSE165 at UC Merced.
+Let's hope the professor lets me implement this so we don't end up with 2 hour demo waits.
 
 # Features
 

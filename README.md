@@ -4,6 +4,10 @@ Let's hope the professor lets me implement this so we don't end up with 2 hour d
 
 # Features
 
+# Installation
+```bash
+sudo wget -qO - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | sudo bash
+```
 
 # Buidling
 

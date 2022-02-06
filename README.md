@@ -1,3 +1,4 @@
+
 # CSE165-LabTools
 Tools used for generating lab structure and grading labs for CSE165 at UC Merced.
 Let's hope the professor lets me implement this so we don't end up with 2 hour demo waits.
@@ -5,9 +6,16 @@ Let's hope the professor lets me implement this so we don't end up with 2 hour d
 # Features
 
 # Installation
+## Linux
 ```bash
 sudo wget -qO - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/master/install.sh | sudo bash
 ```
+## MacOS
+See Linux installation
+
+## Windows
+
+Download latest release or build yourself.  
 
 # Buidling
 
@@ -15,14 +23,12 @@ sudo wget -qO - https://raw.githubusercontent.com/CybrNight/CSE165-LabTools/mast
 ```bash
 git clone https://github.com/CybrNight/CSE165-LabTools.git
 cd CSE165-LabTools
-make
+make release
 ```
-
-### Windows (WSL)
+### Windows 
+Ensure a proper installation of [MSYS2](https://www.msys2.org/) because Microsoft is dumb AF.
 ```bash
-git clone https://github.com/CybrNight/CSE165-LabTools.git
+CLONE REPO WITH FAVORITE METHOD BECAUSE WINDOWS IS DUMB!
 cd CSE165-LabTools
 make win
 ```
-### Windows (Native)
-Just don't even try. Use Linux/WSL.

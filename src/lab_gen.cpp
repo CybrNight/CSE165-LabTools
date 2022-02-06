@@ -45,14 +45,12 @@ void Lab::printFSLayout(){
         std::cout << qNum-max << " more rows left.\n";
 }
 
-bool Lab::isDestEmpty(){
-    
+bool Lab::isDestEmpty(){   
+    return fs::exists(dirPath);
 }
 
 int Lab::generateFolders() {
     char choice;
-
-    int qNum = qNum;
 
     do{
         std::cout << "Would you like to copy the template C++ file to all folders? ("

@@ -5,12 +5,16 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
+#include <bits/stdc++.h>
+#include <filesystem>
 
 
 void mainMenu();
 void printMenu();
 void printCredits();
 void buildLab(Lab* lab);
+
+namespace fs = std::filesystem;
 
 int main() {
     mainMenu();
@@ -56,11 +60,31 @@ void buildLab(Lab* lab) {
     std::cin >> lab->qNum;
 
     std::cout << "\n";
-    lab->printDetails();
     std::cout << "\n";
 
+    lab->dirPath += "Lab" + std::to_string(lab->labNum);
+    std::string choice2;
+
+    //Check if folder already exists
+    if (lab->isDestEmpty()){
+        std::cout << "Destination path (" << lab->dirPath << ") already exists.\n";
+        std::cout << "I)gnore\nD)elete\nA)bort\n";
+        std::cin >> choice2;
+        std::string choice2 = "";
+        transform(choice2.begin(), choice2.end(), choice2.begin(), ::tolower);
+
+        if (choice2.compare("d") || choice2.compare("delete")){
+            std::uintmax_t n = fs::remove_all(lab->dirPath);
+            std::cout << "Deleted Lab" << lab->labNum << " folder + " << n << " files.\n\n";
+        }else{
+            exit(EXIT_SUCCESS);
+        }
+    }
+
+    lab->printDetails();
+
     do {
-        std::cout << "Continue with optimized defaults? (Y/N): ";
+        std::cout << "\nContinue with optimized defaults? (Y/N): ";
         std::cin >> choice;
         choice = std::tolower(choice);
     } while (choice != 'y' && choice != 'n');
@@ -76,22 +100,7 @@ void buildLab(Lab* lab) {
         std::cin >> lab->qNum;
     }
 
-    // Move onto prep for folder creation
-    do {
-        std::cout << "\nPrint filesystem preview? (Y/N): ";
-        std::cin >> choice;
-        choice = std::tolower(choice);
-    } while (choice != 'y' && choice != 'n');
-
-    if (choice == 'y') {
-        std::cout << "\n";
-        lab->printFSLayout();
-        std::cout << "\n";
-    }
-
     // Print out plan for program for user to agree
-    lab->dirPath += "Lab" + std::to_string(lab->labNum);
-
     lab->generateFolders();
 }
 

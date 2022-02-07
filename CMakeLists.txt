@@ -6,10 +6,9 @@ target_compile_features(LabTools PRIVATE cxx_std_17)
 target_include_directories(LabTools PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc/)
 
 make_directory(res)
-make_directory(build/bin/)
 
 install(TARGETS LabTools DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin/)
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/res/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin/)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/res/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/bin/res/)
 
 add_custom_command(
         TARGET LabTools POST_BUILD

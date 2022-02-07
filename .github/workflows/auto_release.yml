@@ -13,6 +13,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix: 
+        os : [windows-latest, ubuntu-latest, macos-latest]
         config:
         - {
           os: windows-latest,
@@ -52,7 +53,7 @@ jobs:
           make --version
           cmake --version
 
-      -name: Configure
+      - name: Configure
         run: |
             mkdir build
             mkdir instdir
@@ -72,7 +73,7 @@ jobs:
         run: cmake --install . --strip
           
       - name: Pack
-        shell: branches
+        shell: bash
         working-directroy: instdir
         run: |
           ls -laR
@@ -86,4 +87,4 @@ jobs:
           prerelease: true
           title: "LabTools-alpha"
           files: |
-            ${{github.workspace}}/${{ matrix.config.artifact}}
+            ${{github.workspace}}/${{ matrix.config.artifact }}

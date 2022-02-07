@@ -30,4 +30,4 @@ jobs:
           prerelease: true
           title: "LabTools${{ steps.vars.outputs.sha_short }}"
           files: |
-            LabTools
+            ${{github.workspace}}/build/LabTools

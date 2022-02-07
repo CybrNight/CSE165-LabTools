@@ -11,34 +11,34 @@ jobs:
     name: Pre-release build
     runs-on: ${{ matrix.config.os }}
     strategy:
-      fail-fast: false
       matrix: 
         os : [windows-latest, ubuntu-latest, macos-latest]
         include:
-          os: windows-latest,
-          artifact: "LabTools-Win.7z",
-          build_type: "Release",
-          cc: "gcc",
-          cxx: "g++",
-          archiver: "7z a",
-        include:
-          os: ubuntu-latest,
-          artifact: "LabTools-Ubuntu.7z",
-          build_type: "Release",
-          cc: "gcc",
-          cxx: "g++",
-          archiver: "7z a",
-        include:
-          os: macos-latest,
-          artifact: "LabTools-MacOS.7z",
-          build_type: "Release",
-          cc: "clang",
-          cxx: "clang++",
-          archiver: "7za a",
+        - os: windows-latest,
+          artifact: "LabTools-Win.7z"
+          build_type: "Release"
+          cc: "gcc"
+          cxx: "g++"
+          archiver: "7z a"
+        
+        - os: ubuntu-latest,
+          artifact: "LabTools-Ubuntu.7z"
+          build_type: "Release"
+          cc: "gcc"
+          cxx: "g++"
+          archiver: "7z a"
+  
+        - os: macos-latest,
+          artifact: "LabTools-MacOS.7z"
+          build_type: "Release"
+          cc: "clang"
+          cxx: "clang++"
+          archiver: "7za a"
           
     steps:
-      - uses: actions/checkout@v2        
-        name: Print env
+      - uses: actions/checkout@v2
+      
+      - name: Print env
         run: |
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
@@ -49,7 +49,7 @@ jobs:
           make --version
           cmake --version
 
-      -name: Configure
+      - name: Configure
         run: |
             mkdir build
             mkdir instdir
@@ -69,8 +69,8 @@ jobs:
         run: cmake --install . --strip
           
       - name: Pack
-        shell: branches
-        working-directroy: instdir
+        shell: bash
+        working-directory: instdir
         run: |
           ls -laR
           ${{ matrix.config.archiver }} ../${{ matrix.config.artifact}}

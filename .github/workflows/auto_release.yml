@@ -16,7 +16,7 @@ jobs:
         config:
         - {
           os: windows-latest,
-          artifact: "LabTools-Win.7z",
+          artifact: "LabTools-Win",
           build_type: "Release",
           cc: "gcc",
           cxx: "g++",
@@ -24,7 +24,7 @@ jobs:
         }
         - {
           os: ubuntu-latest,
-          artifact: "LabTools-Ubuntu.7z",
+          artifact: "LabTools-Ubuntu",
           build_type: "Release",
           cc: "gcc",
           cxx: "g++",
@@ -32,7 +32,7 @@ jobs:
         }
         - {
           os: macos-latest,
-          artifact: "LabTools-MacOS.7z",
+          artifact: "LabTools-MacOS",
           build_type: "Release",
           cc: "clang",
           cxx: "clang++",
@@ -78,4 +78,4 @@ jobs:
           prerelease: true
           title: "LabTools-alpha"
           files: |
-            ${{ github.workspace }}/instdir/${{ matrix.config.artifact }}
+            ${{ github.workspace }}/instdir/${{ matrix.config.artifact }}.zip

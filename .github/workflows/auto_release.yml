@@ -52,7 +52,9 @@ jobs:
         run: |
             mkdir build
             mkdir instdir
-            cmake --build ./build --config Release
+            cd build
+            cmake ..
+            cmake --build . --config Release
 
       - name: Install Strip
         shell: bash

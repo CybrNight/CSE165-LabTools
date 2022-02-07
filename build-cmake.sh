@@ -18,5 +18,6 @@ RESET=$(tput reset)
 mkdir $dest
 cd $dest
 cmake ..
+make
 cp LabTools ..
 echo Done!

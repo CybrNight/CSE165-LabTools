@@ -65,9 +65,8 @@ jobs:
           
       - name: Pack
         shell: bash
-        working-directory: instdir
         run: |
-          ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
+          ${{ matrix.config.archiver }} ${{ matrix.config.artifact }} ./instdir/*
           
       - name: Upload
         uses: actions/upload-artifact@v2

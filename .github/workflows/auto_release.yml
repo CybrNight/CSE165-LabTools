@@ -55,20 +55,29 @@ jobs:
       -name: Configure
         run: |
             mkdir build
+            mkdir instdir
+            cd build
             cmake \
-              -S . \
+              -S .. \
               -B . \
               -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
+            cd ..
 
       - name: Build
+        shell: bash
         run: cmake --build . --config ${{ matrix.config.build_type }}
+
+      - name: Install Strip
+        shell: bash
+        run: cmake --install . --strip
           
       - name: Pack
         shell: branches
-        working-directroy: build
+        working-directroy: instdir
         run: |
+          ls -laR
+          ${{ matrix.config.archiver }} ../${{ matrix.config.artifact}}
           
-      
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@v1.2.1
         with:
@@ -77,4 +86,4 @@ jobs:
           prerelease: true
           title: "LabTools-alpha"
           files: |
-            ${{github.workspace}}/build/LabTools
+            ${{github.workspace}}/${{ matrix.config.artifact }}

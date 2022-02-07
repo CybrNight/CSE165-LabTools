@@ -9,7 +9,7 @@ Let's hope the professor lets me implement this so we don't end up with 2 hour d
 # Installation
 Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/releases) tab.
 
-# Buidling#
+# Buidling
 
 ### Windows/MacOS/Linux
   git clone https://github.com/CybrNight/CSE165-LabTools.git

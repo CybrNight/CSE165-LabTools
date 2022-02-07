@@ -14,6 +14,7 @@ white="$(tput setaf 15)"
 bold=$(tput bold) 
 RESET=$(tput reset) 
 
+mkdir $dest
 cd $dest
 cmake ..
 make

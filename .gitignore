@@ -2,6 +2,7 @@
 
 **/build
 **/zbash_old
+**/instdir
 
 CMakeLists.txt.user
 CMakeCache.txt

@@ -1,7 +1,7 @@
 
 # CSE165-LabTools
 
-![YourActionName Actions Status](https://github.com/CybrNight/CSE165-LabTools/workflows/{workflowName}/badge.svg)](https://github.com/{userName}/{repoName}/actions)
+![YourActionName Actions Status](https://github.com/CybrNight/CSE165-LabTools/workflows/{workflowName}/badge.svg)](https://github.com/{CybrNight}/{CSE165-LabTools}/actions)
 
 Tools used for generating lab structure and grading labs for CSE165 at UC Merced.
 Let's hope the professor lets me implement this so we don't end up with 2 hour demo waits again.

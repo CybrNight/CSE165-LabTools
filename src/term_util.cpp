@@ -2,7 +2,7 @@
 #include <algorithm>
 
 void clearConsole() {
-#ifdef _WIN32
+#ifdef _OS_WINDOWS
     std::system("cls");
 #else
     std::system("clear");

@@ -16,5 +16,7 @@ RESET=$(tput reset)
 
 #Make build directory and use cmake to build for proper architecture
 mkdir $dest
-cmake . ./build
-cp $dest/LabTools .
+cd $dest
+cmake ..
+cp LabTools ..
+echo Done!

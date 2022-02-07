@@ -1,11 +1,6 @@
 #include <lab.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <string>
+#include <sys_util.h>
 #include <algorithm>
-#include <filesystem>
-#include <ctype.h>
 
 
 void mainMenu();
@@ -26,12 +21,7 @@ void mainMenu(){
     printMenu();
     std::cin >> choice;
 
-#ifdef _WIN32
-    std::system("cls");
-#else
-    std::system("clear");
-#endif
-
+    clearConsole();
 
     Lab* lab;
 

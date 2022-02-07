@@ -1,11 +1,5 @@
 #include <lab.h>
-#include <limits.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <filesystem>
-
-#include <iostream>
-#include <string>
+#include <algorithm>
 
 namespace fs = std::filesystem;
 

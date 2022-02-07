@@ -52,14 +52,12 @@ jobs:
         run: |
             mkdir build
             mkdir instdir
-            cd build
-            cmake ..
-            cmake --build . --config Release
+            cmake --build ./build --config Release
 
       - name: Install Strip
         shell: bash
         run: |
-            cmake --install . --strip
+            cmake --install ./build --strip
             cd ..
           
       - name: Pack

@@ -54,24 +54,20 @@ jobs:
           make --version
           cmake --version
 
-      - name: Configure
+      - name: Build
+        shell: bash
         run: |
             mkdir build
             mkdir instdir
             cd build
-            cmake \
-              -S .. \
-              -B . \
-              -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
-            cd ..
-
-      - name: Build
-        shell: bash
-        run: cmake --build . --config ${{ matrix.config.build_type }}
+            cmake ..
+            cmake --build . --config ${{ matrix.config.build_type }}
 
       - name: Install Strip
         shell: bash
-        run: cmake --install . --strip
+        run: |
+            cmake --install . --strip
+            cd ..
           
       - name: Pack
         shell: bash

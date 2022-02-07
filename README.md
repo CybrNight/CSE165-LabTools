@@ -1,8 +1,6 @@
 
 # CSE165-LabTools
 
-[![Pre-release](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/auto_release.yml/badge.svg)](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/auto_release.yml)
-
 Tools used for generating lab structure and grading labs for CSE165 at UC Merced.
 Let's hope the professor lets me implement this so we don't end up with 2 hour demo waits again.
 
@@ -13,9 +11,12 @@ Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/rel
 
 # Buidling
 
-### Linux/MacOS
-```bash
-git clone https://github.com/CybrNight/CSE165-LabTools.git
-cd CSE165-LabTools
-./build-cmake
-```
+### Windows/MacOS/Linux
+  git clone https://github.com/CybrNight/CSE165-LabTools.git
+  cd CSE165-LabTools
+  ./build-cmake
+
+### 
+  git clone https://github.com/CybrNight/CSE165-LabTools.git
+  cd CSE165-LabTools
+  ./build-cmake

@@ -14,6 +14,8 @@ Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/rel
 # Buidling
 
 ### Linux/MacOS
+```bash
 git clone https://github.com/CybrNight/CSE165-LabTools.git
 cd CSE165-LabTools
 ./install.sh
+```

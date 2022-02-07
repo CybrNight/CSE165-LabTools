@@ -67,7 +67,7 @@ jobs:
         working-directory: instdir
         run: |
           ls -laR
-          ${{ matrix.config.archiver }} ../${{ matrix.config.artifact}}
+          ${{ matrix.config.archiver }} ${{ matrix.config.artifact}}
           
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@v1.2.1
@@ -77,4 +77,4 @@ jobs:
           prerelease: true
           title: "LabTools-alpha"
           files: |
-            ${{github.workspace}}/${{ matrix.config.artifact }}
+            ${{github.workspace}}/instdir

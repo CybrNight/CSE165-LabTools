@@ -7,8 +7,8 @@ target_include_directories(LabTools PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc/)
 
 make_directory(res)
 
-install(TARGETS LabTools DESTINATION ${CMAKE_SOURCE_DIR}/inst/)
-install(DIRECTORY ${CMAKE_SOURCE_DIR}/res/ DESTINATION ${CMAKE_SOURCE_DIR}/inst/res/)
+install(TARGETS LabTools DESTINATION inst/)
+install(DIRECTORY ${CMAKE_SOURCE_DIR}/res/ DESTINATION inst/res/)
 
 add_custom_command(
         TARGET LabTools POST_BUILD

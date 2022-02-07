@@ -41,7 +41,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2        
-        name: Print env
+      
+      - name: Print env
         run: |
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}

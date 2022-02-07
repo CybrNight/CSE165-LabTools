@@ -1,7 +1,7 @@
-#include <sys_util.h>
+#include "term_util.h"
 #include <algorithm>
 
-void clearConsole(){
+void clearConsole() {
 #ifdef _WIN32
     std::system("cls");
 #else

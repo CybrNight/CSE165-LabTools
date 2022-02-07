@@ -14,7 +14,7 @@ white="$(tput setaf 15)"
 bold=$(tput bold) 
 RESET=$(tput reset) 
 
+#Make build directory and use cmake to build for proper architecture
 mkdir $dest
-cd $dest
-cmake ..
-make
+cmake . ./build
+cp $dest/LabTools .

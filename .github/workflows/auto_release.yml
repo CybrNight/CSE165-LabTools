@@ -78,4 +78,4 @@ jobs:
           prerelease: true
           title: "LabTools-alpha"
           files: |
-            ${{ github.workspace }}/instdir
+            ${{ github.workspace }}/instdir/${{ matrix.config.artifact }}

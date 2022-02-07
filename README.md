@@ -7,7 +7,7 @@ Let's hope the professor lets me implement this so we don't end up with 2 hour d
 ## Features
 
 ## Installation
-Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/releases) tab.
+Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/releases) tab, or follow below building instructions.
 
 ## Buidling
 

@@ -120,28 +120,23 @@ void buildLab(Lab* lab) {
     }
 
     std::cout << "Enter question count: ";
+    std::cin >> qNum;
 
     //Keep asking until valid option given
     while (std::cin.fail()) {
         std::cout << "Enter question count: ";
         cleanCin();
-        std::cin >> labNum;
+        std::cin >> qNum;
     }
-
-    std::cin >> qNum;
-
-    std::cout << "\n";
-
-    //Check if folder already exists
-
     lab->setQNum(qNum);
-
+    std::cout << "\n";
     lab->printDetails();
-
+    
     char defOpt;
+    std::cout << "\nContinue with optimized defaults? (Y/N): ";
+    std::cin >> defOpt;
     do {
-        std::cout << "\nContinue with optimized defaults? (Y/N): ";
-        std::cin >> defOpt;
+        
         defOpt = std::tolower(defOpt);
     } while (defOpt != 'y' && defOpt != 'n');
 

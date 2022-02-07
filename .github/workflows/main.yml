@@ -9,7 +9,7 @@ on:
 jobs:
   pre_release:
     name: Pre-release build
-    runs-on: ubuntu_latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
 

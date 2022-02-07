@@ -20,7 +20,7 @@ jobs:
         run: |
           cd build
           cmake ..
-          cmake --build . --target LabTools --conifg Release
+          cmake --build . --target LabTools --config Release
           
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@v1.2.1

@@ -45,9 +45,9 @@ void buildLab(Lab* lab) {
     std::string intro =
         "Generates lab project folder with the following structure\n";
 
-#if defined(WIN32) || defined(_WIN32) || \
-    defined(__WIN32) && !defined(__CYGWIN__)
-    std::cout << welcome;
+#ifdef _OS_WINDOWS
+        std::cout
+        << welcome;
     std::cout << "Lab#" << "/\n"
                  "|-- 1/\n"
                  "|-- 2/\n"

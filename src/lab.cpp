@@ -89,7 +89,6 @@ bool Lab::isDestEmpty(){
 }
 
 int Lab::generateFolders() {
-    char choice;
     std::string qPath;
 
     for (int i = 1; i <= qNum; i++) {

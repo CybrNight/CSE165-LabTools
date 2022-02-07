@@ -8,15 +8,8 @@ on:
 
 jobs:
   pre_release:
-    name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }}
-    strategy:
-      matrix:
-        config:
-        -{
-        
-        }
-    
+    name: Pre-release build
+    runs-on: ubunut_latest
     steps:
       - uses: actions/checkout@v2
 
@@ -27,8 +20,7 @@ jobs:
         run: |
           cd build
           cmake ..
-          make
-          cd ..
+          cmake --build . --target LabTools --conifg Release
           
       - name: Automatic Releases
         uses: marvinpinto/action-automatic-releases@v1.2.1

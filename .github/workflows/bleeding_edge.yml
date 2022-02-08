@@ -61,13 +61,15 @@ jobs:
             cmake --build . --config ${{ matrix.config.build_type }}
         
       - name: Install
+        working-directory: build
         run: |
+            pwd
             cmake --install ./build --strip --prefix ..
 
       - name: Pack
         working-directory: build
         run: |
-            echo .
+            pwd
             ${{ matrix.os.archiver }} ../${{ matrix.os.artifact }} ${{
             matrix.os.artifact }}
             

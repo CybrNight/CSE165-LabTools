@@ -20,7 +20,8 @@ jobs:
         config:
         - {
           os: windows-latest,
-          artifact: "LabTools-Win.zip",
+          artifact: "LabTools-Win",
+          bin: "LabTools",
           build_type: "Release",
           cc: "gcc",
           cxx: "g++",
@@ -28,7 +29,8 @@ jobs:
         }
         - {
           os: ubuntu-latest,
-          artifact: "LabTools-Ubuntu.zip",
+          artifact: "LabTools-Ubuntu",
+          bin: "LabTools",
           build_type: "Release",
           cc: "gcc",
           cxx: "g++",
@@ -36,7 +38,7 @@ jobs:
         }
         - {
           os: macos-latest,
-          artifact: "LabTools-MacOS.zip",
+          artifact: "LabTools-MacOS",
           build_type: "Release",
           cc: "clang",
           cxx: "clang++",
@@ -61,14 +63,3 @@ jobs:
         run: |
             cmake ..
             cmake --build . --config Release
-        
-      # Install binaries and resources to inst folder for packaging
-      - name: Install
-        working-directory: build
-        run: cmake --install . --strip --prefix ..
-
-      - name: Upload
-        uses: actions/upload-artifact@v1
-        with:
-          path: ./inst
-          name: ${{ matrix.config.artifact }}

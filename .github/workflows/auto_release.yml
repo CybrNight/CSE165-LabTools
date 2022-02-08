@@ -58,12 +58,12 @@ jobs:
             cmake ..
             cmake --build . --config Release
 
-            mv -v ${{ matrix.config.binpath }} ..
+            mv -v ${{ matrix.config.binpath }} ../${{ matrix.config.artifact }}
 
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           path: |
               res
-              ${{ matrix.config.binpath }}
+              ${{ matrix.config.artifact }}
           name: ${{ matrix.config.artifact }}.zip

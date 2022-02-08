@@ -73,10 +73,9 @@ jobs:
         run: |
             ls -laR
             ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
-            rm -rf *
 
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
-          path: ./${{ matrix.config.artifact }}
+          path: ./inst
           name: ${{ matrix.config.artifact }}

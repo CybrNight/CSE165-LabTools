@@ -50,5 +50,6 @@ if (APPLE)
     add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
                         COMMAND ${CMAKE_COMMAND} -E tar "cfv" 
                         ../${ARCHIVE} --format=zip . WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+endif()
 
 install (FILES build/${ARCHIVE} DESTINATION ${INST_DIR})

@@ -45,7 +45,7 @@ void buildLab(Lab* lab) {
     std::string intro =
         "Generates lab project folder with the following structure\n";
 
-#ifdef _OS_WINDOWS
+#ifdef _WIN32
         std::cout
         << welcome;
     std::cout << "Lab#" << "/\n"

@@ -104,8 +104,8 @@ jobs:
           prerelease: true
           title: "LabTools-LatestDev"
           files: | 
-            "*/LabTools-*.zip"
-            "*/LabTools-*.tar.gz"
+            "**/LabTools-*.zip"
+            "**/LabTools-*.tar.gz"
 
 
 

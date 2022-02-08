@@ -20,7 +20,9 @@ jobs:
         config:
         - {
           os: windows-latest,
-          artifact: "LabTools-Win",
+          artifact: "LabTools-Win.exe",
+          cc: "x86_64-w64-mingw32-gcc",
+          cxx: "x86_64-w64-mingw32-g++",
           binpath: "Release/LabTools.exe",
           build_type: "Release",
           archiver: "7z a",
@@ -28,6 +30,8 @@ jobs:
         - {
           os: ubuntu-latest,
           artifact: "LabTools-Ubuntu",
+          cc: "gcc",
+          cxx: "g++",
           binpath: "LabTools",
           build_type: "Release",
           archiver: "7z a",
@@ -35,6 +39,8 @@ jobs:
         - {
           os: macos-latest,
           artifact: "LabTools-MacOS",
+          cc: "clang",
+          cxx: "clang++",
           binpath: "LabTools",
           build_type: "Release",
           archiver: "7za a",
@@ -55,7 +61,7 @@ jobs:
       - name: Build
         working-directory: build
         run: |
-            cmake ..
+            cmake .. CMAKE_C_COMPILER=${{ matrix.config.cc }} -D CMAKE_CXX_COMPILER=${{ matrix.config.cxx }}
             cmake --build . --config Release
 
             mv -v ${{ matrix.config.binpath }} ../${{ matrix.config.artifact }}
@@ -66,4 +72,4 @@ jobs:
           path: |
               res
               ${{ matrix.config.artifact }}
-          name: ${{ matrix.config.artifact }}.zip
+          name: ${{ matrix.config.artifact }}

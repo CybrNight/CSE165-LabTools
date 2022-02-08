@@ -7,8 +7,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build-files:
-    name: Bleeding-Edge
+  build:
+    name: ${{matrix.config.name}}
     runs-on: ${{ matrix.config.os }}
     defaults:
       run:
@@ -19,7 +19,7 @@ jobs:
       matrix: 
         config:
         - {
-          name: "Windows",
+          name: "Windows MINGW",
           os: windows-latest,
           artifact: "LabTools-Win.exe",
           cc: "x86_64-w64-mingw32-gcc",

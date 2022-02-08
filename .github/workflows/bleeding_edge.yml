@@ -69,7 +69,7 @@ jobs:
         working-directory: instdir
         run: |
             ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} ${{
-            matrix.os.artifact }}
+            matrix.os.artifact }} ..
             
       - name: Upload
         uses: actions/upload-artifact@v2
@@ -104,8 +104,8 @@ jobs:
           prerelease: true
           title: "LabTools-LatestDev"
           files: | 
-            "*/LabTools-*.zip"
-            "*/LabTools-*.tar.gz"
+            "**/LabTools-*.zip"
+            "**/LabTools-*.zip"
 
 
 

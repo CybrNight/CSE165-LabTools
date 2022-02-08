@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.18)
 project(LabTools VERSION 0.4 DESCRIPTION "STUFF" LANGUAGES CXX)
 SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
 set(RES_DIR res)
-set(INST_DIR inst)
+set(INST_DIR instdir)
 
 # Set install vars
 if(UNIX AND NOT APPLE)

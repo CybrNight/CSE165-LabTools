@@ -52,7 +52,7 @@ jobs:
       - name: Configure
         run: |
             cmake -E make_directory build
-            cmake -E make_directory inst
+            cmake -E make_directory instdir
 
       - name: Build
         working-directory: build
@@ -62,7 +62,7 @@ jobs:
         
       - name: Install
         run: |
-            cmake --install . --prefix ..
+            cmake --install ./build --strip --prefix ..
 
       - name: Pack
         working-directory: inst

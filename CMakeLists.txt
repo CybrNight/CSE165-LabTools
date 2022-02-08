@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 project(LabTools VERSION 0.4 DESCRIPTION "STUFF" LANGUAGES CXX)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY LabTools)
 set(RES_DIR res)
 set(INST_DIR instdir)
 
@@ -10,7 +10,7 @@ if(UNIX AND NOT APPLE)
 endif()
 
 if(LINUX)
-    set(ARCHIVE LabTools-Ubuntu.zip)
+    set(ARCHIVE LabTools-Ubuntu.tar.gz)
 endif() 
     
 if (APPLE)
@@ -33,8 +33,14 @@ add_custom_command(TARGET ${CMAKE_PROJECT_NAME} PRE_BUILD
                     ${CMAKE_SOURCE_DIR}/res/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/res/)
 
 #Compress built executable
-add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-                    COMMAND ${CMAKE_COMMAND} -E tar "cfv" 
-                    ../${ARCHIVE} --format=zip ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+if (LINUX)
+    add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+                        COMMAND ${CMAKE_COMMAND} -E tar "cfvz" 
+                        ../${ARCHIVE} * WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+else()
+    add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+                        COMMAND ${CMAKE_COMMAND} -E tar "cfv" 
+                        ../${ARCHIVE} --format=zip * WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
+endif()
 
 install (FILES build/${ARCHIVE} DESTINATION ${INST_DIR})

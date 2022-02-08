@@ -19,20 +19,20 @@ jobs:
       matrix: 
         config:
         - {
+          name: "Ubuntu",
+          os: ubuntu-latest,
+          artifact: "LabTools-Ubuntu.tar.gz",
+          cc: "gcc",
+          cxx: "g++",
+          build_type: "Release",
+          archiver: "7z a",
+        }
+        - {
           name: "Windows",
           os: windows-latest,
           artifact: "LabTools-Win.zip",
           cc: "x86_64-w64-mingw32-gcc",
           cxx: "x86_64-w64-mingw32-g++",
-          build_type: "Release",
-          archiver: "7z a",
-        }
-        - {
-          name: "Ubuntu",
-          os: ubuntu-latest,
-          artifact: "LabTools-Ubuntu.zip",
-          cc: "gcc",
-          cxx: "g++",
           build_type: "Release",
           archiver: "7z a",
         }
@@ -103,7 +103,9 @@ jobs:
           automatic_release_tag: latest
           prerelease: true
           title: "LabTools-LatestDev"
-          files: "**/LabTools-*.zip"
+          files: | 
+            "**/LabTools-*.zip"
+            "**/LabTools-*.tar.gz"
 
 
 

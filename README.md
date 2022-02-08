@@ -7,16 +7,4 @@ Let's hope the professor lets me implement this so we don't end up with 2 hour d
 ## Features
 
 ## Installation
-Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/releases) tab.
-
-## Buidling
-
-### Windows/MacOS/Linux
-  git clone https://github.com/CybrNight/CSE165-LabTools.git
-  cd CSE165-LabTools
-  ./build-cmake
-
-### 
-  git clone https://github.com/CybrNight/CSE165-LabTools.git
-  cd CSE165-LabTools
-  ./build-cmake
+Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/releases) tab, or follow below building instructions.

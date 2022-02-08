@@ -1,0 +1,80 @@
+# This is a basic workflow to help you get started with Actions
+name: Pre-release
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+jobs:
+  pre_release:
+    name: Bleeding-Edge
+    runs-on: ${{ matrix.config.os }}
+    defaults:
+      run:
+        shell: bash
+
+    strategy:
+      fail-fast: false
+      matrix: 
+        config:
+        - {
+          os: windows-latest,
+          artifact: "LabTools-Win",
+          build_type: "Release",
+          cc: "gcc",
+          cxx: "g++",
+          archiver: "7z a",
+        }
+        - {
+          os: ubuntu-latest,
+          artifact: "LabTools-Ubuntu",
+          build_type: "Release",
+          cc: "gcc",
+          cxx: "g++",
+          archiver: "7z a",
+        }
+        - {
+          os: macos-latest,
+          artifact: "LabTools-MacOS",
+          build_type: "Release",
+          cc: "clang",
+          cxx: "clang++",
+          archiver: "7za a",
+        }
+
+    steps:
+      - uses: actions/checkout@v2        
+      
+      - name: Print env
+        run: |
+          echo github.event.action: ${{ github.event.action }}
+          echo github.event_name: ${{ github.event_name }}
+
+      - name: Confiure
+        run: |
+            cmake -E make_directory build
+            cmake -E make_directory inst
+
+      - name: Build
+        working-directory: build
+        run: |
+            cmake ..
+            cmake --build . --config Release
+        
+      # Install binaries and resources to inst folder for packaging
+      - name: Install
+        working-directory: build
+        run: cmake --install . --strip --prefix ..
+
+      - name: Pack
+        working-directory: inst
+        run: |
+            ls -laR
+            ${{ matrix.config.os }} ../${{ matrix.config.artifact }}.zip .
+
+      - name: Upload
+        uses: actions/upload-artifact@v1
+        with:
+          path: ./${{ matrix.config.artifact }}
+          name: ${{ matrix.config.artifact }}

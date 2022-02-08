@@ -61,7 +61,7 @@ jobs:
       - name: Build
         working-directory: build
         run: |
-            cmake .. CMAKE_C_COMPILER=${{ matrix.config.cc }} -D CMAKE_CXX_COMPILER=${{ matrix.config.cxx }}
+            cmake -D CMAKE_CXX_COMPILER=${{ matrix.config.cxx }} CMAKE_C_COMPILER=${{ matrix.config.cc }} .. 
             cmake --build . --config Release
 
             mv -v ${{ matrix.config.binpath }} ../${{ matrix.config.artifact }}

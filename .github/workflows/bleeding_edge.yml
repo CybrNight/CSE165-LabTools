@@ -52,7 +52,7 @@ jobs:
       - name: Configure
         run: |
             cmake -E make_directory build
-            cmake -E make_directory build
+            cmake -E make_directory inst
 
       - name: Build
         working-directory: build
@@ -68,6 +68,7 @@ jobs:
       - name: Pack
         working-directory: inst
         run: |
+            ls -laR
             ${{ matrix.os.archiver }} ../${{ matrix.os.artifact }} ${{ matrix.os.artifact}}
             
       - name: Upload

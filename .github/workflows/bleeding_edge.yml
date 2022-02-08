@@ -64,7 +64,7 @@ jobs:
         working-directory: build
         run: |
             pwd
-            cmake --install . --strip --prefix ..
+            cmake --install . --prefix ..
 
       - name: Pack
         working-directory: instdir

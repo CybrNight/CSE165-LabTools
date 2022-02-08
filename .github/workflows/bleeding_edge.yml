@@ -94,7 +94,7 @@ jobs:
           automatic_release_tag: latest
           prerelease: true
           title: "Latest Build"
-          files: "**/LabTools-*.zip"
+          files: "**/LabTools-*"
 
 
 

@@ -67,13 +67,6 @@ jobs:
         working-directory: build
         run: cmake --install . --strip --prefix ..
 
-      # Pack up binary + resource into zip and clean up for the next job
-      - name: Pack
-        working-directory: inst
-        run: |
-            ls -laR
-            ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
-
       - name: Upload
         uses: actions/upload-artifact@v1
         with:

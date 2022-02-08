@@ -61,7 +61,7 @@ jobs:
             cmake --build . --config ${{ matrix.config.build_type }}
         
       - name: Install
-        working-directory: inst
+        working-directory: build
         run: |
             cmake --install . --prefix ..
 

@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  pre_release:
+  build-files:
     name: Bleeding-Edge
     runs-on: ${{ matrix.config.os }}
     defaults:
@@ -76,4 +76,27 @@ jobs:
               res
               ${{ matrix.config.artifact }}
           name: ${{ matrix.config.name }}
-          target: ${{ matrix.config.os }}
+  
+  prerelease:
+    needs: build
+    runs-on: ubuntu-latest
+    if: ${{ github.ref == 'refs/heads/master' }}
+
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+
+      - name: Update GitHub prerelease
+        if: ${{ github.ref == 'refs/heads/master' }}
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: latest
+          prerelease: true
+          title: "Latest Build"
+          files: "**/LabTools-*.zip"
+
+
+
+        
+      

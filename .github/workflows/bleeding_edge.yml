@@ -85,6 +85,13 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
 
     steps:
+      - name: Declare git vars
+        id: vars
+        run: |
+          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
+          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+
+
       - name: Download artifacts
         uses: actions/download-artifact@v2
 
@@ -93,9 +100,9 @@ jobs:
         uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: latest
+          automatic_release_tag: ${{ steps.vars.outputs.sha_short }}
           prerelease: true
-          title: "Latest Build"
+          title: "LabTools${{ steps.vars.outputs.sha_short }}"
           files: "**/LabTools-*.zip"
 
 

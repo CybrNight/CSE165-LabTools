@@ -1,23 +1,40 @@
-cmake_minimum_required(VERSION 3.15)
-project(LabTools VERSION 0.0.1 DESCRIPTION "STUFF" LANGUAGES CXX)
+cmake_minimum_required(VERSION 3.18)
+project(LabTools VERSION 0.4 DESCRIPTION "STUFF" LANGUAGES CXX)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY bin)
+set(RES_DIR res)
+set(INST_DIR inst)
+
+# Set install vars
+if(UNIX AND NOT APPLE)
+    set(LINUX TRUE)
+endif()
+
+if(LINUX)
+    set(ARCHIVE LabTools-Ubuntu.zip)
+endif() 
+    
+if (APPLE)
+    set(ARCHIVE LabTools-Mac.zip)
+endif()
+
+if (WIN32)
+    set(ARCHIVE LabTools-Windows.zip)
+endif()
+
+make_directory(${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 
 add_executable(${CMAKE_PROJECT_NAME} src/main.cpp src/lab.cpp src/term_util.cpp)
 target_compile_features(${CMAKE_PROJECT_NAME} PRIVATE cxx_std_17)
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/inc/)
 
-set(INST_DIR inst/)
-set(RES_DIR res/)
+#Copy res dir to bin folder
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} PRE_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E copy_directory
+                    ${CMAKE_SOURCE_DIR}/res/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/res/)
 
+#Compress built executable
+add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
+                    COMMAND ${CMAKE_COMMAND} -E tar "cfz" 
+                    ${ARCHIVE} ${CMAKE_BINARY_DIR})
 
-#Copy resources to build dir
-make_directory(${RES_DIR})
-
-add_custom_command(
-        TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
-        COMMAND ${CMAKE_COMMAND} -E copy
-                ${CMAKE_SOURCE_DIR}/res/t.cpp
-                ${CMAKE_CURRENT_BINARY_DIR}/res/t.cpp)
-
-
-install (TARGETS ${CMAKE_PROJECT_NAME} DESTINATION ${INST_DIR})
-install (DIRECTORY ${RES_DIR} DESTINATION ${INST_DIR}/res/)
+install (FILES build/${ARCHIVE} DESTINATION ${INST_DIR})

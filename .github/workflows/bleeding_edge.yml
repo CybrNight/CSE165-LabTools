@@ -68,8 +68,9 @@ jobs:
       - name: Pack
         working-directory: inst
         run: |
-            ls -laR
-            ${{ matrix.os.archiver }} ../${{ matrix.os.artifact }} ${{ matrix.os.artifact}}
+            echo .
+            ${{ matrix.os.archiver }} ../${{ matrix.os.artifact }} ${{
+            matrix.os.artifact }}
             
       - name: Upload
         uses: actions/upload-artifact@v2

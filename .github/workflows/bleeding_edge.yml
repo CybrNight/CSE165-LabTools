@@ -49,6 +49,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2        
 
+      - name: Configure
+        run: |
+            cmake -E make_directory build
+            cmake -E make_directory build
+
       - name: Build
         working-directory: build
         run: |

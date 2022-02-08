@@ -63,13 +63,20 @@ jobs:
       - name: Install
         run: |
             cmake --install ./build --strip --prefix ..
+
+      - name: Pack
+        working-directory: instdir
+        run: |
+            echo .
+            ${{ matrix.os.archiver }} ../${{ matrix.os.artifact }} ${{
+            matrix.os.artifact }}
             
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           path: |
               res
-              instdir/${{ matrix.config.artifact }}
+              ${{ matrix.config.artifact }}
           name: ${{ matrix.config.name }}
   
   prerelease:

@@ -69,8 +69,8 @@ jobs:
         with:
           path: |
               res
-              ${{ matrix.config.artifact }}
-          name: instdir/${{ matrix.config.name }}
+              instdir/${{ matrix.config.artifact }}
+          name: ${{ matrix.config.name }}
   
   prerelease:
     needs: build

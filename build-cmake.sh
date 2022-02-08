@@ -1,5 +1,15 @@
 #!/bin/bash
 
+if [ "$EUID" -ne 0 ]
+  then echo "Please run as root"
+  exit
+fi
+
+#Install dependencies for building
+apt update
+apt install build-essential
+apt install cmake
+
 dest="build"
 
 #Define colors
@@ -15,7 +25,7 @@ bold=$(tput bold)
 RESET=$(tput reset) 
 
 #Make build directory and use cmake to build for proper architecture
-mkdir $dest
+cmake -E make_directory $dest
 cd $dest
 cmake ..
 cmake --build . --config Release

@@ -63,14 +63,12 @@ jobs:
       - name: Install
         working-directory: build
         run: |
-            pwd
             cmake --install . --prefix ..
 
       - name: Pack
         working-directory: instdir
         run: |
-            pwd
-            ${{ matrix.os.archiver }} ../${{ matrix.os.artifact }} ${{
+            ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} ${{
             matrix.os.artifact }} ..
             
       - name: Upload

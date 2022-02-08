@@ -71,7 +71,7 @@ jobs:
         run: |
             pwd
             ${{ matrix.os.archiver }} ../${{ matrix.os.artifact }} ${{
-            matrix.os.artifact }}
+            matrix.os.artifact }} ..
             
       - name: Upload
         uses: actions/upload-artifact@v2

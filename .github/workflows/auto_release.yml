@@ -77,4 +77,4 @@ jobs:
         uses: actions/upload-artifact@v1
         with:
           path: ./${{ matrix.config.artifact }}
-          name: ${{ matrix.config.artifact }}
+          name: ${{ matrix.config.artifact }}.zip

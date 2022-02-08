@@ -21,10 +21,8 @@ jobs:
         - {
           os: windows-latest,
           artifact: "LabTools-Win",
-          bin: "LabTools",
+          bin: "LabTools.exe",
           build_type: "Release",
-          cc: "gcc",
-          cxx: "g++",
           archiver: "7z a",
         }
         - {
@@ -32,16 +30,13 @@ jobs:
           artifact: "LabTools-Ubuntu",
           bin: "LabTools",
           build_type: "Release",
-          cc: "gcc",
-          cxx: "g++",
           archiver: "7z a",
         }
         - {
           os: macos-latest,
           artifact: "LabTools-MacOS",
+          bin: "LabTools",
           build_type: "Release",
-          cc: "clang",
-          cxx: "clang++",
           archiver: "7za a",
         }
 
@@ -56,10 +51,19 @@ jobs:
       - name: Confiure
         run: |
             cmake -E make_directory build
-            cmake -E make_directory inst
 
       - name: Build
         working-directory: build
         run: |
             cmake ..
             cmake --build . --config Release
+
+            mv -v ${{ matrix.config.bin }} ..
+
+      - name: Upload
+        uses: actions/upload-artifact@v2
+        with:
+          path: |
+              res
+              ${{ matrix.config.bin }}
+          name: ${{ matrix.config.artifact }}.zip

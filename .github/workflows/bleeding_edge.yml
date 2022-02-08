@@ -65,7 +65,7 @@ jobs:
             cmake --install ./build --strip --prefix ..
 
       - name: Pack
-        working-directory: instdir
+        working-directory: build
         run: |
             echo .
             ${{ matrix.os.archiver }} ../${{ matrix.os.artifact }} ${{

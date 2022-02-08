@@ -64,21 +64,13 @@ jobs:
         working-directory: build
         run: |
             cmake --install . --prefix ..
-
-      - name: Pack
-        working-directory: instdir
-        run: |
-            ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} ${{
-            matrix.os.artifact }}
             
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           path: |
-              res
-              ${{ matrix.config.artifact }}
-          name: ${{ matrix.config.name }}
-  
+              instdir/${{ matrix.config.artifact }}
+          name: ${{ matrix.config.artifact }}
   prerelease:
     needs: build
     runs-on: ubuntu-latest
@@ -104,8 +96,8 @@ jobs:
           prerelease: true
           title: "LabTools-LatestDev"
           files: | 
-            "*/LabTools-*.zip"
-            "*/LabTools-*.tar.gz"
+            "**/LabTools-*.zip"
+            "**/LabTools-*.tar.gz"
 
 
 

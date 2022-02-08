@@ -33,6 +33,7 @@ add_custom_command(TARGET ${CMAKE_PROJECT_NAME} PRE_BUILD
                     ${CMAKE_SOURCE_DIR}/res/ ${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/res/)
 
 #Compress built executable
+
 if (LINUX)
     add_custom_command(TARGET ${CMAKE_PROJECT_NAME} POST_BUILD
                         COMMAND ${CMAKE_COMMAND} -E tar "cfvz" 

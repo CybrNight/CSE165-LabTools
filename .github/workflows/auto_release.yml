@@ -76,3 +76,4 @@ jobs:
               res
               ${{ matrix.config.artifact }}
           name: ${{ matrix.config.name }}
+          target: ${{ matrix.config.os }}

@@ -71,7 +71,7 @@ jobs:
         working-directory: inst
         run: |
             ls -laR
-            ${{ matrix.config.os }} ../${{ matrix.config.artifact }}.zip .
+            ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }}.zip .
 
       - name: Upload
         uses: actions/upload-artifact@v1

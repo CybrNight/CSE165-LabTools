@@ -20,7 +20,7 @@ jobs:
         config:
         - {
           os: windows-latest,
-          artifact: "LabTools-Win",
+          artifact: "LabTools-Win.zip",
           build_type: "Release",
           cc: "gcc",
           cxx: "g++",
@@ -28,7 +28,7 @@ jobs:
         }
         - {
           os: ubuntu-latest,
-          artifact: "LabTools-Ubuntu",
+          artifact: "LabTools-Ubuntu.zip",
           build_type: "Release",
           cc: "gcc",
           cxx: "g++",
@@ -36,7 +36,7 @@ jobs:
         }
         - {
           os: macos-latest,
-          artifact: "LabTools-MacOS",
+          artifact: "LabTools-MacOS.zip",
           build_type: "Release",
           cc: "clang",
           cxx: "clang++",
@@ -71,10 +71,10 @@ jobs:
         working-directory: inst
         run: |
             ls -laR
-            ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }}.zip .
+            ${{ matrix.config.archiver }} ../${{ matrix.config.artifact }} .
 
       - name: Upload
         uses: actions/upload-artifact@v1
         with:
           path: ./${{ matrix.config.artifact }}
-          name: ${{ matrix.config.artifact }}.zip
+          name: ${{ matrix.config.artifact }}

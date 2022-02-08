@@ -9,4 +9,4 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
  - Grade labs based on user-defined test cases (Incoming)
 
 ## Installation
-Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/releases) tab, or follow below building instructions.
+Grab latest build in [releases](https://github.com/CybrNight/CSE165-LabTools/releases) tab, or latest pipeline build.

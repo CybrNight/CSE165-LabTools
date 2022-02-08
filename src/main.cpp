@@ -46,16 +46,14 @@ void buildLab(Lab* lab) {
         "Generates lab project folder with the following structure\n";
 
 #ifdef _WIN32
-        std::cout
-        << welcome;
+    std::cout << intro;
     std::cout << "Lab#" << "/\n"
                  "|-- 1/\n"
                  "|-- 2/\n"
                  "|-- 3/\n"
                  "|-- 4/\n";
 #else
-        std::cout
-        << intro;
+    std::cout << intro;
     std::cout << "Lab#"
               << "/\n"
                  "├─ 1/\n"

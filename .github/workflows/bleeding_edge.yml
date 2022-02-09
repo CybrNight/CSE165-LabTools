@@ -67,10 +67,14 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/master' }}
 
+    # This shows exactly that the files I need are downloaded properly
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v2
-      - run: ls **/*.tar.gz
+      - run: |
+          ls *
+          ls **/*.zip
+          ls **/*.tar.gz
 
       - name: Update GitHub prerelease
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -81,7 +85,7 @@ jobs:
           prerelease: true
           title: "Latest Build"
           files: |
-            .*
+            *
 
 
         

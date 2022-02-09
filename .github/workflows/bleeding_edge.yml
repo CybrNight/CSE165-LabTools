@@ -28,15 +28,6 @@ jobs:
           archiver: "7z a",
         }
         - {
-          name: "Windows",
-          os: windows-latest,
-          artifact: "LabTools-Win.zip",
-          cc: "x86_64-w64-mingw32-gcc",
-          cxx: "x86_64-w64-mingw32-g++",
-          build_type: "Release",
-          archiver: "7z a",
-        }
-        - {
           name: "Mac",
           os: macos-latest,
           artifact: "LabTools-MacOS.zip",

@@ -78,6 +78,10 @@ jobs:
       - name: Download artifacts
         uses: actions/download-artifact@v2
 
+      - name: List directory
+        run: |
+          ls Mac
+
       - name: Update GitHub prerelease
         if: ${{ github.ref == 'refs/heads/master' }}
         uses: marvinpinto/action-automatic-releases@latest

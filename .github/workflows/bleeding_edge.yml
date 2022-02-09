@@ -68,24 +68,16 @@ jobs:
     if: ${{ github.ref == 'refs/heads/master' }}
 
     steps:
-      - name: Declare git vars
-        id: vars
-        run: |
-          echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
-          echo "::set-output name=sha_short::$(git rev-parse --short HEAD)"
+      - uses: actions/checkout@v2
 
+      - uses: actions/download-artifact@v2
 
-      - name: Download artifacts
-        uses: actions/download-artifact@latest
-
-      - name: List directory
-        run: |
-          pwd
-          ls
+      - name: Display structure of downloaded files
+        run: ls -R
 
       - name: Update GitHub prerelease
         if: ${{ github.ref == 'refs/heads/master' }}
-        uses: marvinpinto/action-automatic-releases@latest
+        uses: marvinpinto/action-automatic-releases@1.2.1
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: latest

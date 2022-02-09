@@ -81,8 +81,8 @@ jobs:
           prerelease: true
           title: "Latest Build"
           files: |
-            "./**/*.zip"
-            "./**/*.tar.gz"
+            /**/*.zip
+            /**/*.tar.gz
 
 
         

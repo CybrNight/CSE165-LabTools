@@ -76,7 +76,7 @@ jobs:
 
 
       - name: Download artifacts
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@latest
 
       - name: List directory
         run: |
@@ -92,7 +92,7 @@ jobs:
           prerelease: true
           title: "LabTools-LatestDev"
           files: | 
-            "**"
+            "LabTools-Mac.zip"
 
 
         

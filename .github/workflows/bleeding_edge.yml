@@ -30,7 +30,7 @@ jobs:
         - {
           name: "Mac",
           os: macos-latest,
-          artifact: "LabTools-MacOS.zip",
+          artifact: "LabTools-Mac.zip",
           cc: "clang",
           cxx: "clang++",
           build_type: "Release",
@@ -80,7 +80,7 @@ jobs:
 
       - name: List directory
         run: |
-          ls Mac
+          ls
 
       - name: Update GitHub prerelease
         if: ${{ github.ref == 'refs/heads/master' }}

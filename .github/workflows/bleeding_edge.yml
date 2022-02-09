@@ -80,6 +80,7 @@ jobs:
 
       - name: List directory
         run: |
+          pwd
           ls
 
       - name: Update GitHub prerelease
@@ -91,7 +92,7 @@ jobs:
           prerelease: true
           title: "LabTools-LatestDev"
           files: | 
-            "*"
+            "**"
 
 
         

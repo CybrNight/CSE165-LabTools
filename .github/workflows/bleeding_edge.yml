@@ -73,7 +73,10 @@ jobs:
       - uses: actions/download-artifact@v2
 
       - name: Display structure of downloaded files
-        run: ls -R
+        run: | 
+          ls -R
+          cd Mac
+          ls
 
       - name: Update GitHub prerelease
         if: ${{ github.ref == 'refs/heads/master' }}
@@ -84,8 +87,7 @@ jobs:
           prerelease: true
           title: "LabTools-LatestDev"
           files: | 
-            "Mac/LabTools-Mac.zip"
-            "Ubuntu/LabTools-Ubuntu.tar.gz"
+            "LabTools-Mac.zip"
 
 
         

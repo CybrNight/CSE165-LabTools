@@ -61,33 +61,27 @@ jobs:
         with:
           path: |
               instdir/${{ matrix.config.artifact }}
-          name: ${{ matrix.config.name }}
+          name: LabTools-${{ matrix.config.name }}
   prerelease:
     needs: build
     runs-on: ubuntu-latest
     if: ${{ github.ref == 'refs/heads/master' }}
 
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: actions/download-artifact@v2
-
-      - name: Display structure of downloaded files
-        run: | 
-          ls -R
-          cd Mac
-          ls
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
 
       - name: Update GitHub prerelease
         if: ${{ github.ref == 'refs/heads/master' }}
-        uses: marvinpinto/action-automatic-releases@v1.2.1
+        uses: marvinpinto/action-automatic-releases@latest
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: latest
           prerelease: true
-          title: "LabTools-LatestDev"
-          files: | 
-            "LabTools-Mac.zip"
+          title: "Latest Build"
+          files: |
+            "**/*.zip"
+            "**/*.tar.gz"
 
 
         

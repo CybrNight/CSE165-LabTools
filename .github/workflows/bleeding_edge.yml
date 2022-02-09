@@ -61,7 +61,7 @@ jobs:
         with:
           path: |
               instdir/${{ matrix.config.artifact }}
-          name: ${{ matrix.config.artifact }}
+          name: ${{ matrix.config.name }}
   prerelease:
     needs: build
     runs-on: ubuntu-latest
@@ -84,7 +84,7 @@ jobs:
           prerelease: true
           title: "LabTools-LatestDev"
           files: | 
-            "LabTools-Mac.zip"
+            "**/LabTools-*.zip"
 
 
         

@@ -91,8 +91,8 @@ jobs:
           prerelease: true
           title: "LabTools-LatestDev"
           files: | 
-            "LabTools-Mac.zip"
-            "LabTools-Ubuntu.tar.gz"
+            "LabTools-Mac.zip.zip"
+            "LabTools-Ubuntu.tar.gz.zip"
 
 
 

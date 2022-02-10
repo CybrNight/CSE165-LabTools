@@ -53,20 +53,14 @@ void buildLab(Lab* lab) {
     int labNum;
     int qNum;
     std::string templatePath;
+    std::string prefix;
+    std::string pDir;
 
     std::cout << "---Lab Folder Generator---\n\n";
 
     std::string intro =
         "Generates lab project folder with the following structure\n";
 
-#ifdef _WIN32
-    std::cout << intro;
-    std::cout << "Lab#" << "/\n"
-                 "|-- 1/\n"
-                 "|-- 2/\n"
-                 "|-- 3/\n"
-                 "|-- 4/\n";
-#else
     std::cout << intro;
     std::cout << "Lab#"
               << "/\n"
@@ -76,7 +70,6 @@ void buildLab(Lab* lab) {
                  "├─ 4/\n";
 
     std::cout << "..." << "\n\n";
-#endif
 
     // Initialize lab object
     std::cout << "Enter lab number: ";
@@ -147,23 +140,61 @@ void buildLab(Lab* lab) {
     char defOpt;
     std::cout << "\nContinue with optimized defaults? (Y/N): ";
     std::cin >> defOpt;
-    do {
-        
+    do { 
         defOpt = std::tolower(defOpt);
     } while (defOpt != 'y' && defOpt != 'n');
 
     if (defOpt == 'n') {
         std::cout << "Enter C++ file prefix: ";
-        std::cin >> labNum;
+        std::cin >> prefix;
 
-        std::cout << "Enter lab parent directory: ";
-        std::cin >> qNum;
+        while (std::cin.fail()) {
+            std::cout << "Enter C++ file prefix: ";
+            cleanCin();
+            std::cin >> prefix;
+        }
 
-        std::cout << "Enter path to template file: ";
+        lab->setPrefix(prefix);
+        std::cout << "\n";
+
+        std::cout << "Enter path to lab parent directory: ";
+        std::cin >> pDir;
+
+        while (std::cin.fail()) {
+            std::cout << "Enter path to lab parent directory: ";
+            cleanCin();
+            std::cin >> pDir;
+        }
+        lab->setPDir(pDir);
+        std::cout << "\n";
+
+        std::cout << "Enter path to template file including C++ file: ";
         std::cin >> templatePath;
+
+        while (std::cin.fail()) {
+            std::cout << "Enter path to template file including C++ file: ";
+            cleanCin();
+            std::cin >> templatePath;
+        }
+        lab->setTemplate(templatePath);
+        std::cout << "\n";
     }
 
     //TODO: Print out plan for program for user to agree
+    lab->printFSLayout();
+
+    char choice;
+    std::cout << "Will create the above file structure at (" << lab->getPDir()
+            << ")\n";
+    std::cout << "Continue with operation? (Y/N): ";
+    std::cin >> choice;
+
+    choice = std::tolower(choice);
+
+    if (choice != 'y'){
+        std::cout << "Operation cancelled";
+        exit(EXIT_SUCCESS);
+    }
 
     try {
         lab->generateFolders();

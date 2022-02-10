@@ -32,6 +32,7 @@ class Lab {
         void setLabNum(int labNum);
         void setQNum(int labNum);
         void setPDir(std::string pDir); //Set parent directory and update full path
+        void setPrefix(std::string prefix);
         void updateFullPath(); //Builds final path pDir+labNum and saves to dirPath
         void setTemplate(std::string tPath);
 

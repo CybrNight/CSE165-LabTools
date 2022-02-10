@@ -1,5 +1,6 @@
 #include <lab.h>
 #include <algorithm>
+#include <fstream>
 
 namespace fs = std::filesystem;
 
@@ -7,15 +8,10 @@ namespace fs = std::filesystem;
 Lab::Lab() {
     prefix = "N/A";
     usePrefix = false;
-    useTemplate = true;
+    useTemplate = false;
     setLabNum(1);
     setPDir(fs::current_path().u8string());
-    tPath = fs::current_path().u8string() + "/res/t.cpp";
-
-    if (!fs::exists(tPath)){
-        tPath = "N/A";
-        useTemplate = false;
-    }
+    tPath = "N/A";
 
     if (!usePrefix){
         prefix = "N/A";
@@ -64,6 +60,10 @@ void Lab::setTemplate(std::string tPath){
     this->tPath = tPath;
 }
 
+void Lab::setPrefix(std::string prefix){
+    this->prefix = prefix;
+}
+
 void Lab::updateFullPath(){
     fullPath = pDir.u8string() + "/Lab" + std::to_string(labNum);
 }
@@ -89,15 +89,14 @@ void Lab::printFSLayout(){
         max = qNum;
     }
     
-#ifdef _WIN32
     for (int i = 1; i <= max; i++) {
-        std::cout << "|--" << prefix << i << " /\n";
+        std::cout << "├─" << i << " /\n";
+        if (prefix.compare("N/A") != 0){
+            std::cout << "|  ├─ " << prefix << i << ".cpp"
+                      << "\n";
+        }else
+            std::cout << "|  ├─ " << i << ".cpp" << "\n";
     }
-#else
-    for (int i = 1; i <= max; i++) {
-        std::cout << "├─" << prefix << i << " /\n";
-    }
-#endif
     
     if (qNum > 10)
         std::cout << qNum-max << " more rows left.\n";
@@ -110,11 +109,8 @@ bool Lab::destExists(){
 int Lab::generateFolders() {
     std::string qPath;
     
+    fs::create_directory(pDir);
     fs::create_directory(fullPath);
-
-    if (tPath.compare("N/A") == 0) {
-        std::cout << "NO TEMPLATE FILE SPECIFIED! SKIPPING STEP!\n";
-    }
 
     for (int i = 1; i <= qNum; i++) {
         qPath = fullPath.u8string() + "/" + std::to_string(i);
@@ -130,10 +126,22 @@ int Lab::generateFolders() {
 
         if (useTemplate && tPath.compare("N/A") != 0){
             fs::copy(tPath, qPath);
+        }else{
+            std::ofstream outfile(qPath);
+            outfile << "#include <iostream>\n";
+            outfile << "#include <string>\n";
+            outfile << "int main(){\n";
+            outfile << "\n";
+            outfile << "}\n";
+            outfile.close();
         }
     }
 
     return 1;
+}
+
+fs::path Lab::getPDir(){
+    return pDir;
 }
 
 fs::path Lab::getFullPath() {

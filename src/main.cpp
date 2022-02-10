@@ -127,7 +127,7 @@ void buildLab(Lab* lab) {
                 std::cout << "Deleted directory " << lab->getFullPath() << " folder containing " << n
                         << " files.\n\n";
             }
-        } else {
+        } else if (delOpt.compare("a") || delOpt.compare("abort")) {
             exit(EXIT_SUCCESS);
         }
     }
@@ -152,7 +152,7 @@ void buildLab(Lab* lab) {
     defOpt = std::tolower(defOpt);
 
     //Keep asking until valid option entered
-    while (std::cin.fail() && defOpt != 'n' && defOpt != 'y'){
+    while (defOpt != 'n' && defOpt != 'y'){
         std::cout << "Continue with optimized defaults? (Y/N): ";
         cleanCin();
         std::cin >> defOpt;

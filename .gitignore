@@ -1,8 +1,8 @@
 **/.vscode/
 
 **/build
-**/zbash_old
-**/instdir
+
+*.tar.gz
 
 CMakeLists.txt.user
 CMakeCache.txt

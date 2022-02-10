@@ -211,8 +211,3 @@ void printMenu(){
     std::cout << "3. Credits (not implemented) \n";
     std::cout << "4. Quit\n";
 }
-
-void cleanCin(){
-    std::cin.clear();
-    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-}

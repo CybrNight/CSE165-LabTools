@@ -14,6 +14,7 @@ Lab::Lab() {
 
     if (!fs::exists(tPath)){
         tPath = "N/A";
+        useTemplate = false;
     }
 
     if (!usePrefix){
@@ -21,6 +22,25 @@ Lab::Lab() {
     }
 
     qNum = 1;
+}
+
+Lab::Lab(int labNum){
+    prefix = "N/A";
+    usePrefix = false;
+    useTemplate = false;
+    setLabNum(labNum);
+    setPDir(fs::current_path().u8string());
+    tPath = fs::current_path().u8string() + "/res/t.cpp";
+
+    if (!fs::exists(tPath)) {
+        tPath = "N/A";
+    }
+
+    if (!usePrefix) {
+        prefix = "N/A";
+    }
+
+    qNum = 6;
 }
 
 fs::path Lab::getTemplate(){
@@ -90,6 +110,12 @@ bool Lab::isDestEmpty(){
 
 int Lab::generateFolders() {
     std::string qPath;
+    
+    fs::create_directory(fullPath);
+
+    if (tPath.compare("N/A") == 0) {
+        std::cout << "NO TEMPLATE FILE SPECIFIED! SKIPPING STEP!\n";
+    }
 
     for (int i = 1; i <= qNum; i++) {
         qPath = fullPath.u8string() + "/" + std::to_string(i);
@@ -105,8 +131,6 @@ int Lab::generateFolders() {
 
         if (useTemplate && tPath.compare("N/A") != 0){
             fs::copy(tPath, qPath);
-        } else if (tPath.compare("N/A") == 0) {
-            std::cout << "NO TEMPLATE FILE SPECIFIED! SKIPPING STEP!\n";
         }
     }
 

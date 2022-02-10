@@ -1,7 +1,7 @@
 #include <lab.h>
 #include <term_util.h>
 #include <algorithm>
-
+#include <cstdlib>
 
 void mainMenu();
 void printMenu();
@@ -11,8 +11,18 @@ void cleanCin();
 
 namespace fs = std::filesystem;
 
-int main() {
-    mainMenu();
+int main(int argc, char* argv[]) {
+    //If no arguments are passed show main menu for default behvaior
+    if (argc < 2)
+        mainMenu();
+    else{ //If lab name is given then generate default structure without templates
+        int labNum = atoi(argv[1]);
+        std::cout << labNum << "\n";
+        if (labNum != 0){
+            Lab* lab = new Lab(labNum);
+            lab->generateFolders();
+        }
+    }
 }
 
 void mainMenu(){
@@ -33,6 +43,8 @@ void mainMenu(){
         default:
             exit (EXIT_SUCCESS);
     }
+
+    delete lab;
 }
 
 void buildLab(Lab* lab) {

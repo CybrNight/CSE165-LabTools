@@ -22,6 +22,8 @@ class Lab {
 
     public:
         Lab();
+        Lab(int labNum);
+
         void printDetails(); //Print all details
         void printFSLayout(); //Print filesystem layout
         int generateFolders(); //Generates all folders for lab

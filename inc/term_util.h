@@ -2,6 +2,6 @@
 #define TERM_UTIL
 
 void clearConsole();
-void clearCin();
+void cleanCin();
 
 #endif

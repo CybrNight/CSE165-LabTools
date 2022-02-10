@@ -7,7 +7,6 @@ void mainMenu();
 void printMenu();
 void printCredits();
 void buildLab(Lab* lab);
-void cleanCin();
 
 namespace fs = std::filesystem;
 
@@ -155,7 +154,7 @@ void buildLab(Lab* lab) {
     //Keep asking until valid option entered
     while (std::cin.fail() || defOpt != 'n' || defOpt != 'y'){
         std::cout << "Continue with optimized defaults? (Y/N): ";
-        clearCin();
+        cleanCin();
         std::cin >> defOpt;
         defOpt = std::tolower(defOpt);
     }
@@ -221,7 +220,7 @@ void buildLab(Lab* lab) {
     while (std::cin.fail()){
         std::cout << "Will create the above file structure at ("
                   << lab->getPDir() << ")\n";
-        clearCin();
+        cleanCin();
         std::cin >> choice;
     }
 

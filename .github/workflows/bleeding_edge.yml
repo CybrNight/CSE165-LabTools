@@ -4,6 +4,8 @@ name: Pre-release
 on:
   push:
     branches: [master]
+    paths:
+      - '*.cpp'
   workflow_dispatch:
 
 jobs:

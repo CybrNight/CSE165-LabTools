@@ -12,7 +12,7 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
  - Grade labs based on user-defined test cases (Incoming)
 
 ## Installation
-Download the latest automatic build from [here](https://github.com/CybrNight/CSE165-LabTools/blob/master/.github/workflows/bleeding_edge.yml).  
+Download the latest automatic build from [here](https://nightly.link/CybrNight/CSE165-LabTools/workflows/bleeding_edge/master).  
 Full stable releases incoming.
 
 ## Supported Platforms

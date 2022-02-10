@@ -36,5 +36,3 @@ if (APPLE)
                         COMMAND ${CMAKE_COMMAND} -E tar "cfv" 
                         ../${ARCHIVE} --format=zip . WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 endif()
-
-install (FILES ${ARCHIVE} DESTINATION ${INST_DIR})

@@ -47,7 +47,7 @@ Lab01/
 ```
 
 ### Normal Operations
-- Running from the command line/GUI with no arguments will open the main program menu
+Running from the command line/GUI with no arguments will open the main program menu in the terminal.
 
 ### Lab Grader (WIP)
 This feature is not currently finished. Will not be supported on Windows. 

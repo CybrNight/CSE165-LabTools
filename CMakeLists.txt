@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.18)
 project(LabTools VERSION 0.4 DESCRIPTION "STUFF" LANGUAGES CXX)
-SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY LabTools)
+SET(CMAKE_RUNTIME_OUTPUT_DIRECTORY build)
 set(RES_DIR res)
 set(INST_DIR instdir)
 
@@ -14,7 +14,7 @@ if(LINUX)
 endif() 
     
 if (APPLE)
-    set(ARCHIVE LabTools-Mac.zip)
+    set(ARCHIVE LabTools-MacOS.zip)
 endif()
 
 make_directory(${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
@@ -37,4 +37,4 @@ if (APPLE)
                         ../${ARCHIVE} --format=zip . WORKING_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DIRECTORY})
 endif()
 
-install (FILES build/${ARCHIVE} DESTINATION ${INST_DIR})
+install (FILES ${ARCHIVE} DESTINATION ${INST_DIR})

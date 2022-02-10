@@ -29,16 +29,14 @@ jobs:
           cc: "gcc",
           cxx: "g++",
           build_type: "Release",
-          archiver: "7z a",
         }
         - {
-          name: "Mac",
+          name: "MacOS",
           os: macos-10.15,
-          artifact: "LabTools-Mac.zip",
+          artifact: "LabTools-MacOS.zip",
           cc: "clang",
           cxx: "clang++",
           build_type: "Release",
-          archiver: "7za a",
         }
 
     steps:
@@ -47,24 +45,18 @@ jobs:
       - name: Configure
         run: |
             cmake -E make_directory build
-            cmake -E make_directory instdir
 
       - name: Build
         working-directory: build
         run: |
             cmake -D CMAKE_CXX_COMPILER=${{ matrix.config.cxx }} CMAKE_C_COMPILER=${{ matrix.config.cc }} .. 
             cmake --build . --config ${{ matrix.config.build_type }}
-        
-      - name: Install
-        working-directory: build
-        run: |
-            cmake --install . --prefix ..
             
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
           path: |
-              instdir/${{ matrix.config.artifact }}
+              ${{ matrix.config.artifact }}
           name: LabTools-${{ matrix.config.name }}
 
 

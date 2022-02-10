@@ -19,11 +19,10 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
 
 ## Supported Platforms
 - Ubuntu
-	- Other Debian based distros should work since I only use the standard C/C++ libraries.
+	- Other Debian based distros should work since I only use the standard C/C++ libraries
 	- Non-Debian distros like Arch should also be compatible for the same reason
-- MacOS 10.15 Catalina or higher (blame Apple not me).
-- Windows is not officially supported because the grade system takes advantage of bash scripts
-	- The folder generator options should work though
+- MacOS 10.15 Catalina or higher (blame Apple not me)
+- Sorry Windows users, but Microsoft makes things difficult
 
 ## Usage
 
@@ -57,11 +56,6 @@ sudo apt install cmake
 
  - Download latest release of XCode
  - Download latest [CMake version for MacOS](https://cmake.org/install/)
-
-#### Windows (not officially supported)
-
- - Install and configure [MSYS 2](https://www.msys2.org/) (MSBuild should also work)
- - Download latest [CMake version for Windows](https://cmake.org/install/)
 
 ### Building With CMake
 ```bash

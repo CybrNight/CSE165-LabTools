@@ -112,15 +112,15 @@ void buildLab(Lab* lab) {
             std::cout << "\nWARNING!!! DIRECTORY " << lab->getFullPath() << " "
             "WILL BE PERMANATELY DELETED!\n Are you sure? (Y/N): ";
             std::cin >> confirmDel;
+            confirmDel = std::tolower(confirmDel);
 
             //Keep asking till vaild option is entered
-            while (std::cin.fail()){
+            while (std::cin.fail() || confirmDel != 'n' || confirmDel != 'y'){
                 std::cout << "Choose valid option!\n";
                 cleanCin();
                 std::cin >> confirmDel;
+                confirmDel = std::tolower(confirmDel);
             }
-
-            confirmDel = std::tolower(confirmDel);
 
             //If yes then delete directory
             if (confirmDel == 'y'){
@@ -150,10 +150,14 @@ void buildLab(Lab* lab) {
     char defOpt;
     std::cout << "\nContinue with optimized defaults? (Y/N): ";
     std::cin >> defOpt;
-    while (std::cin.fail()){
+    defOpt = std::tolower(defOpt);
+
+    //Keep asking until valid option entered
+    while (std::cin.fail() || defOpt != 'n' || defOpt != 'y'){
         std::cout << "Continue with optimized defaults? (Y/N): ";
         clearCin();
-        std::cin >> defOpt; 
+        std::cin >> defOpt;
+        defOpt = std::tolower(defOpt);
     }
 
     //If no then ask user to enter new settings
@@ -175,7 +179,11 @@ void buildLab(Lab* lab) {
         std::cin >> pDir;
 
         // Keep asking until valid string entry
-        while (std::cin.fail()) {
+        while (std::cin.fail() || !fs::exists(pDir)) {
+            if (!fs::exists(pDir)) {
+                std::cout << "Entered directory doesn't exist!\n";
+            }
+
             std::cout << "Enter path to lab parent directory: ";
             cleanCin();
             std::cin >> pDir;
@@ -188,6 +196,10 @@ void buildLab(Lab* lab) {
         std::cin >> tPath;
 
         while (std::cin.fail() || !fs::exists(tPath)) {
+            if (!fs::exists(tPath)){
+                std::cout << "Entered template file doesn't exist!\n";
+            }
+
             std::cout << "Enter path to template file including C++ file: ";
             cleanCin();
             std::cin >> tPath;
@@ -204,6 +216,14 @@ void buildLab(Lab* lab) {
             << ")\n";
     std::cout << "Continue with operation? (Y/N): ";
     std::cin >> choice;
+
+    //Keep asking until valid option is entered
+    while (std::cin.fail()){
+        std::cout << "Will create the above file structure at ("
+                  << lab->getPDir() << ")\n";
+        clearCin();
+        std::cin >> choice;
+    }
 
     choice = std::tolower(choice);
 

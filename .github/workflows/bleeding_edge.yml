@@ -5,9 +5,7 @@ on:
   push:
     branches: [master]
     paths:
-      - 'src'
-      - 'inc'
-      - '.github'
+      - '**.cpp'
   workflow_dispatch:
 
 jobs:

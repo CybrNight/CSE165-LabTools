@@ -50,9 +50,10 @@ void mainMenu(){
 }
 
 void buildLab(Lab* lab) {
+    //Define vars to enter into lab object
     int labNum;
     int qNum;
-    std::string templatePath;
+    std::string tPath;
     std::string prefix;
     std::string pDir;
 
@@ -61,6 +62,7 @@ void buildLab(Lab* lab) {
     std::string intro =
         "Generates lab project folder with the following structure\n";
 
+    //Print example file structure
     std::cout << intro;
     std::cout << "Lab#"
               << "/\n"
@@ -88,24 +90,30 @@ void buildLab(Lab* lab) {
     std::string delOpt;
     char confirmDel;
     if (lab->destExists()) {
+        //Ask if user action for folder
         std::cout << "Destination path (" << lab->getFullPath()
                   << ") already exists.\n";
         std::cout << "I)gnore\nD)elete\nA)bort\n";
         std::cin >> delOpt;
 
+        //Keep asking til valid entry is entered
         while (std::cin.fail()) {
             std::cout << "Choose valid option!\n";
             cleanCin();
             std::cin >> delOpt;
         }
 
+        //Convert delOpt to lowercase
         transform(delOpt.begin(), delOpt.end(), delOpt.begin(), ::tolower);
 
+        //If delete option is selected confirm with user that they actually
+        //want to delete it
         if (delOpt.compare("d") || delOpt.compare("delete")) {
             std::cout << "\nWARNING!!! DIRECTORY " << lab->getFullPath() << " "
             "WILL BE PERMANATELY DELETED!\n Are you sure? (Y/N): ";
             std::cin >> confirmDel;
 
+            //Keep asking till vaild option is entered
             while (std::cin.fail()){
                 std::cout << "Choose valid option!\n";
                 cleanCin();
@@ -114,6 +122,7 @@ void buildLab(Lab* lab) {
 
             confirmDel = std::tolower(confirmDel);
 
+            //If yes then delete directory
             if (confirmDel == 'y'){
                 std::uintmax_t n = fs::remove_all(lab->getFullPath());
                 std::cout << "Deleted directory " << lab->getFullPath() << " folder containing " << n
@@ -137,17 +146,22 @@ void buildLab(Lab* lab) {
     std::cout << "\n";
     lab->printDetails();
     
+    //Ask user if they want to continue with defaults
     char defOpt;
     std::cout << "\nContinue with optimized defaults? (Y/N): ";
     std::cin >> defOpt;
-    do { 
-        defOpt = std::tolower(defOpt);
-    } while (defOpt != 'y' && defOpt != 'n');
+    while (std::cin.fail()){
+        std::cout << "Continue with optimized defaults? (Y/N): ";
+        clearCin();
+        std::cin >> defOpt; 
+    }
 
+    //If no then ask user to enter new settings
     if (defOpt == 'n') {
         std::cout << "Enter C++ file prefix: ";
         std::cin >> prefix;
 
+        //Keep asking until valid string entry
         while (std::cin.fail()) {
             std::cout << "Enter C++ file prefix: ";
             cleanCin();
@@ -160,6 +174,7 @@ void buildLab(Lab* lab) {
         std::cout << "Enter path to lab parent directory: ";
         std::cin >> pDir;
 
+        // Keep asking until valid string entry
         while (std::cin.fail()) {
             std::cout << "Enter path to lab parent directory: ";
             cleanCin();
@@ -168,15 +183,16 @@ void buildLab(Lab* lab) {
         lab->setPDir(pDir);
         std::cout << "\n";
 
+        // Keep asking until valid string entry
         std::cout << "Enter path to template file including C++ file: ";
-        std::cin >> templatePath;
+        std::cin >> tPath;
 
-        while (std::cin.fail()) {
+        while (std::cin.fail() || !fs::exists(tPath)) {
             std::cout << "Enter path to template file including C++ file: ";
             cleanCin();
-            std::cin >> templatePath;
+            std::cin >> tPath;
         }
-        lab->setTemplate(templatePath);
+        lab->setTemplate(tPath);
         std::cout << "\n";
     }
 
@@ -196,6 +212,7 @@ void buildLab(Lab* lab) {
         exit(EXIT_SUCCESS);
     }
 
+    //Generate folders
     try {
         lab->generateFolders();
         std::cout << "Files created successfully" << "\n";

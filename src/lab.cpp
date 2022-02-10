@@ -10,14 +10,13 @@ Lab::Lab() {
     usePrefix = false;
     useTemplate = false;
     setLabNum(1);
+    qNum = 6;
     setPDir(fs::current_path().u8string());
     tPath = "N/A";
 
     if (!usePrefix){
         prefix = "N/A";
     }
-
-    qNum = 1;
 }
 
 Lab::Lab(int labNum, int qNum){
@@ -27,11 +26,7 @@ Lab::Lab(int labNum, int qNum){
     setLabNum(labNum);
     this->qNum = qNum;
     setPDir(fs::current_path().u8string());
-    tPath = fs::current_path().u8string() + "/res/t.cpp";
-
-    if (!fs::exists(tPath)) {
-        tPath = "N/A";
-    }
+    tPath = "N/A";
 
     if (!usePrefix) {
         prefix = "N/A";
@@ -58,6 +53,10 @@ void Lab::setQNum(int qNum){
 
 void Lab::setTemplate(std::string tPath){
     this->tPath = tPath;
+
+    if (!fs::exists(tPath)) {
+        tPath = "N/A";
+    }
 }
 
 void Lab::setPrefix(std::string prefix){
@@ -109,9 +108,11 @@ bool Lab::destExists(){
 int Lab::generateFolders() {
     std::string qPath;
     
+    //Create parent dir and the full dir
     fs::create_directory(pDir);
     fs::create_directory(fullPath);
 
+    //Create all question subfolders
     for (int i = 1; i <= qNum; i++) {
         qPath = fullPath.u8string() + "/" + std::to_string(i);
         fs::create_directory(qPath);
@@ -124,6 +125,7 @@ int Lab::generateFolders() {
             qPath += "/" + std::to_string(i) + ".cpp";
         }
 
+        //If template file defined, copy it. Otherwise build generic from scratch
         if (useTemplate && tPath.compare("N/A") != 0){
             fs::copy(tPath, qPath);
         }else{

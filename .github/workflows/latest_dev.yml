@@ -1,4 +1,4 @@
-name: latest
+name: latest-dev
 
 on:
   push:

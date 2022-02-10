@@ -12,6 +12,7 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
  - Grade labs based on user-defined test cases (Incoming)
 
 ## Download
+Sorry about the zipped tar.gz, GitHub automatically zips up all artifacts on download
 | Platform      | Status |Releases|
 | ----------- | ----------- |--|
 | Linux      | [![Pre-release](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/bleeding_edge.yml/badge.svg)](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/bleeding_edge.yml)      |[Latest-Dev](https://nightly.link/CybrNight/CSE165-LabTools/workflows/bleeding_edge/master/LabTools-Ubuntu.zip) ◦ Stable (*coming soon*)

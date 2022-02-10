@@ -18,7 +18,6 @@ int main(int argc, char* argv[]) {
     }else if (argc >= 3){ //If lab name is given then generate default structure without templates
         int labNum = atoi(argv[1]);
         int qNum = atoi(argv[2]);
-        std::cout << labNum << "\n";
         if (labNum != 0 && qNum != 0){
             Lab* lab = new Lab(labNum, qNum);
             

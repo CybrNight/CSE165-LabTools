@@ -6,6 +6,8 @@ on:
     branches: [master]
     paths:
       - '**.cpp'
+      - '**.h'
+      - '**.yml'
   workflow_dispatch:
 
 jobs:

@@ -2,6 +2,7 @@
 
 
 
+
 # CSE165-LabTools
 
 Tools used for generating lab structure and grading labs for CSE165 at UC Merced. This project started as a simple bash script to generate my lab folders, but quickly evolved into a program intended for not only building the lab structure, but also grading the labs to improve demo times. 
@@ -26,10 +27,21 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
 
 ## Usage
 
+### Quick Generate Lab Folders
+If a lab number and question count is passed on the command line like so: `./LabTools 6 6` then it will generate the folder structure in the current directory automatically without a template file. As a safety measure against data loss, if a lab folder with the name `Lab#` already exists the directory exists nothing happens.
+The example will generate the following structure in the directory from where the program is run:
+```
+Lab6
+├─ 1/
+├─ 2/
+├─ 3/
+├─ 4/
+├─ 5/
+├─ 6/
+```
 ### Normal Operations
 - Running from the command line/GUI with no arguments will open the main program menu
-### Quick Generate Lab Folders
-If a lab number and question count is passed on the command line like so: `./LabTools 6 6` then it will generate the folder structure automatically without a template file. 
+
 ### Lab Grader (WIP)
 This feature is not currently finished. Will not be supported on Windows. 
 

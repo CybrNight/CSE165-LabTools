@@ -9,3 +9,10 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
 ## Features
  - Auto generate lab folder structure per the professor's requirements
  - Grade labs based on user-defined test cases (Incoming)
+
+## Installation
+ There are ongoing issues with my automatic release system. Please download the latest artifact from the actions tab. I will update the releases tab every so often when enough changes are made 
+
+## Usage
+
+## Building

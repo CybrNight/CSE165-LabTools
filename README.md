@@ -31,10 +31,10 @@ Sorry about the zipped tar.gz, GitHub automatically zips up all artifacts on dow
 ## Usage
 
 ### Quick Generate Lab Folders
-If a lab number and question count is passed on the command line like so: `./LabTools 1 4` then it will generate the folder structure in the current directory automatically with a basic C++ file in each directory. As a safety measure against data loss, if a lab folder with the name `Lab#` already exists the directory exists nothing happens. Numerical input for the lab number supports leading zeros.
+If a lab number and question count is passed on the command line like so: `./LabTools 01 4` then it will generate the folder structure in the current directory automatically with a basic C++ file in each directory. As a safety measure against data loss, if a lab folder with the name `Lab#` already exists the directory exists nothing happens. Numerical input for the lab number supports leading zeros.
 The example will generate the following structure in the directory from where the program is run:
 ```
-Lab1/
+Lab01/
 ├─ 1/
 │  ├─ 1.cpp
 ├─ 2/

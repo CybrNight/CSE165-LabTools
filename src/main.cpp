@@ -13,9 +13,10 @@ namespace fs = std::filesystem;
 
 int main(int argc, char* argv[]) {
     //If no arguments are passed show main menu for default behvaior
-    if (argc < 2)
+    if (argc < 2){
+        std::cout << "HELLO" << std::endl;
         mainMenu();
-    else{ //If lab name is given then generate default structure without templates
+    }else{ //If lab name is given then generate default structure without templates
         int labNum = atoi(argv[1]);
         std::cout << labNum << "\n";
         if (labNum != 0){

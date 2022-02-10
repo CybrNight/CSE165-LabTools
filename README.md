@@ -3,6 +3,7 @@
 
 
 
+
 # CSE165-LabTools
 
 Tools used for generating lab structure and grading labs for CSE165 at UC Merced. This project started as a simple bash script to generate my lab folders, but quickly evolved into a program intended for not only building the lab structure, but also grading the labs to improve demo times. 
@@ -13,10 +14,11 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
 
 ## Download
 Sorry about the zipped tar.gz, GitHub automatically zips up all artifacts on download
-| Platform      | Status |Releases|
-| ----------- | ----------- |--|
-| Linux      | [![Pre-release](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/bleeding_edge.yml/badge.svg)](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/bleeding_edge.yml)      |[Latest-Dev](https://nightly.link/CybrNight/CSE165-LabTools/workflows/bleeding_edge/master/LabTools-Ubuntu.zip) ◦ Stable (*coming soon*)
-| Mac   | [![Pre-release](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/bleeding_edge.yml/badge.svg)](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/bleeding_edge.yml)        |[Latest-Dev](https://nightly.link/CybrNight/CSE165-LabTools/workflows/bleeding_edge/master/LabTools-Mac.zip) ◦ Stable (*coming soon*)
+[![latest-dev](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/latest_dev.yml/badge.svg)](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/latest.yml)
+| Platform      |Releases|
+| ----------- |--|
+| Linux      |[Latest-Dev](https://nightly.link/CybrNight/CSE165-LabTools/workflows/bleeding_edge/master/LabTools-Ubuntu.zip) ◦ Stable (*coming soon*) |
+| Mac         |[Latest-Dev](https://nightly.link/CybrNight/CSE165-LabTools/workflows/bleeding_edge/master/LabTools-Mac.zip) ◦ Stable (*coming soon*) |
 
 ## Supported Platforms
 - Ubuntu

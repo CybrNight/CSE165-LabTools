@@ -10,11 +10,13 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
 
 ## Features
  - Auto generate lab folder structure per the professor's requirements
- - Grade labs based on user-defined test cases (Incoming)
+ - Auto build and run all files for lab (*coming soon*)
+ - Grade labs based on user-defined test cases (*coming soon*)
 
 ## Download
-Sorry about the zipped tar.gz, GitHub automatically zips up all artifacts on download
 [![latest-dev](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/latest_dev.yml/badge.svg)](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/latest.yml)
+
+Sorry about the zipped tar.gz, GitHub automatically zips up all artifacts on download
 | Platform      |Releases|
 | ----------- |--|
 | Linux      |[Latest-Dev](https://nightly.link/CybrNight/CSE165-LabTools/workflows/bleeding_edge/master/LabTools-Ubuntu.zip) ◦ Stable (*coming soon*) |
@@ -24,25 +26,29 @@ Sorry about the zipped tar.gz, GitHub automatically zips up all artifacts on dow
 - Ubuntu
 	- Other Debian based distros should work since I only use the standard C/C++ libraries
 	- Non-Debian distros like Arch should also be compatible for the same reason
-- MacOS 10.15 Catalina or higher (blame Apple not me)
+- MacOS 10.15 Catalina or higher
 - Sorry Windows users, but Microsoft makes things difficult
 
 ## Usage
 
 ### Quick Generate Lab Folders
-If a lab number and question count is passed on the command line like so: `./LabTools 6 6` then it will generate the folder structure in the current directory automatically without a template file. As a safety measure against data loss, if a lab folder with the name `Lab#` already exists the directory exists nothing happens.
+If a lab number and question count is passed on the command line like so: `./LabTools 01 4` then it will generate the folder structure in the current directory automatically with a basic C++ file in each directory. As a safety measure against data loss, if a lab folder with the name `Lab#` already exists the directory exists nothing happens. Numerical input for the lab number supports leading zeros.
 The example will generate the following structure in the directory from where the program is run:
 ```
-Lab6
+Lab01/
 ├─ 1/
+│  ├─ 1.cpp
 ├─ 2/
+│  ├─ 2.cpp
 ├─ 3/
+│  ├─ 3.cpp
 ├─ 4/
-├─ 5/
-├─ 6/
+│  ├─ 4.cpp
+
 ```
+
 ### Normal Operations
-- Running from the command line/GUI with no arguments will open the main program menu
+Running from the command line/GUI with no arguments will open the main program menu in the terminal.
 
 ### Lab Grader (WIP)
 This feature is not currently finished. Will not be supported on Windows. 

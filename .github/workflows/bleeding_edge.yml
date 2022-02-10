@@ -62,30 +62,6 @@ jobs:
           path: |
               instdir/${{ matrix.config.artifact }}
           name: LabTools-${{ matrix.config.name }}
-  prerelease:
-    needs: build
-    runs-on: ubuntu-latest
-    if: ${{ github.ref == 'refs/heads/master' }}
-
-    # This shows exactly that the files I need are downloaded properly
-    steps:
-      - name: Download artifacts
-        uses: actions/download-artifact@v2
-      - run: |
-          ls *
-          ls **/*.zip
-          ls **/*.tar.gz
-
-      - name: Update GitHub prerelease
-        if: ${{ github.ref == 'refs/heads/master' }}
-        uses: marvinpinto/action-automatic-releases@latest
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: latest
-          prerelease: true
-          title: "Latest Build"
-          files: |
-            *
 
 
         

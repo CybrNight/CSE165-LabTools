@@ -15,12 +15,15 @@ int main(int argc, char* argv[]) {
     //If no arguments are passed show main menu for default behvaior
     if (argc < 2){
         mainMenu();
-    }else{ //If lab name is given then generate default structure without templates
+    }else if (argc >= 3){ //If lab name is given then generate default structure without templates
         int labNum = atoi(argv[1]);
+        int qNum = atoi(argv[2]);
         std::cout << labNum << "\n";
-        if (labNum != 0){
-            Lab* lab = new Lab(labNum);
-            lab->generateFolders();
+        if (labNum != 0 && qNum != 0){
+            Lab* lab = new Lab(labNum, qNum);
+            
+            if (!lab->destExists())
+                lab->generateFolders();
         }
     }
 }
@@ -92,7 +95,7 @@ void buildLab(Lab* lab) {
     //Check if destination exists, if it does ask to delete it
     std::string delOpt;
     char confirmDel;
-    if (lab->isDestEmpty()) {
+    if (lab->destExists()) {
         std::cout << "Destination path (" << lab->getFullPath()
                   << ") already exists.\n";
         std::cout << "I)gnore\nD)elete\nA)bort\n";
@@ -161,18 +164,22 @@ void buildLab(Lab* lab) {
         std::cin >> templatePath;
     }
 
-    // Print out plan for program for user to agree
+    //TODO: Print out plan for program for user to agree
 
-    lab->generateFolders();
+    try {
+        lab->generateFolders();
+        std::cout << "Files created successfully" << "\n";
+    }catch (int e){
+        std::cout << "Failed to create lab files. Returned " << e << "\n";
+    }
 }
 
 void printMenu(){
     std::cout << "CSE165-LabTools\n\n";
     std::cout << "1. Lab folder generator\n";
-    std::cout << "2. Lab grading\n";
-    std::cout << "3. GitHub\n";
-    std::cout << "4. Credits\n";
-    std::cout << "5. Quit\n";
+    std::cout << "2. Lab grading (not implemented) \n";
+    std::cout << "3. Credits (not implemented) \n";
+    std::cout << "4. Quit\n";
 }
 
 void cleanCin(){

@@ -24,11 +24,12 @@ Lab::Lab() {
     qNum = 1;
 }
 
-Lab::Lab(int labNum){
+Lab::Lab(int labNum, int qNum){
     prefix = "N/A";
     usePrefix = false;
     useTemplate = false;
     setLabNum(labNum);
+    this->qNum = qNum;
     setPDir(fs::current_path().u8string());
     tPath = fs::current_path().u8string() + "/res/t.cpp";
 
@@ -39,8 +40,6 @@ Lab::Lab(int labNum){
     if (!usePrefix) {
         prefix = "N/A";
     }
-
-    qNum = 6;
 }
 
 fs::path Lab::getTemplate(){
@@ -104,7 +103,7 @@ void Lab::printFSLayout(){
         std::cout << qNum-max << " more rows left.\n";
 }
 
-bool Lab::isDestEmpty(){   
+bool Lab::destExists(){   
     return fs::exists(fullPath);
 }
 

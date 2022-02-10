@@ -22,12 +22,12 @@ class Lab {
 
     public:
         Lab();
-        Lab(int labNum);
+        Lab(int labNum, int qNum);
 
         void printDetails(); //Print all details
         void printFSLayout(); //Print filesystem layout
         int generateFolders(); //Generates all folders for lab
-        bool isDestEmpty(); //Checks if lab's location is taken
+        bool destExists(); //Checks if lab's location is taken
 
         void setLabNum(int labNum);
         void setQNum(int labNum);

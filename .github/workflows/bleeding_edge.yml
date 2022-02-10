@@ -4,6 +4,10 @@ name: Pre-release
 on:
   push:
     branches: [master]
+    paths:
+      - 'src'
+      - 'inc'
+      - '.github'
   workflow_dispatch:
 
 jobs:

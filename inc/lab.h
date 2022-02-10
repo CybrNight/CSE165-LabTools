@@ -9,7 +9,7 @@ namespace fs = std::filesystem;
 
 class Lab {
     
-    int labNum;
+    std::string labNum;
     int qNum;
 
     bool usePrefix;
@@ -22,21 +22,21 @@ class Lab {
 
     public:
         Lab();
-        Lab(int labNum, int qNum);
+        Lab(std::string labNum, int qNum);
 
         void printDetails(); //Print all details
         void printFSLayout(); //Print filesystem layout
         int generateFolders(); //Generates all folders for lab
         bool destExists(); //Checks if lab's location is taken
 
-        void setLabNum(int labNum);
+        void setLabNum(std::string labNum);
         void setQNum(int labNum);
         void setPDir(std::string pDir); //Set parent directory and update full path
         void setPrefix(std::string prefix);
         void updateFullPath(); //Builds final path pDir+labNum and saves to dirPath
         void setTemplate(std::string tPath);
 
-        int getLabNum();
+        std::string getLabNum();
         int getQNum();
         fs::path getPDir();
         fs::path getFullPath();

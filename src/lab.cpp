@@ -9,7 +9,7 @@ Lab::Lab() {
     prefix = "N/A";
     usePrefix = false;
     useTemplate = false;
-    setLabNum(1);
+    setLabNum("1");
     qNum = 6;
     setPDir(fs::current_path().u8string());
     tPath = "N/A";
@@ -19,7 +19,7 @@ Lab::Lab() {
     }
 }
 
-Lab::Lab(int labNum, int qNum){
+Lab::Lab(std::string labNum, int qNum){
     prefix = "N/A";
     usePrefix = false;
     useTemplate = false;
@@ -37,7 +37,7 @@ fs::path Lab::getTemplate(){
     return tPath;
 }
 
-void Lab::setLabNum(int labNum){
+void Lab::setLabNum(std::string labNum){
     this->labNum = labNum;
     updateFullPath();
 }
@@ -64,7 +64,7 @@ void Lab::setPrefix(std::string prefix){
 }
 
 void Lab::updateFullPath(){
-    fullPath = pDir.u8string() + "/Lab" + std::to_string(labNum);
+    fullPath = pDir.u8string() + "/Lab" + labNum;
 }
 
 void Lab::printDetails() {

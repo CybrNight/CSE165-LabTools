@@ -33,7 +33,7 @@ jobs:
         - {
           name: "MacOS",
           os: macos-10.15,
-          artifact: "LabTools-MacOS.zip",
+          artifact: "LabTools-MacOS.tar.gz",
           cc: "clang",
           cxx: "clang++",
           build_type: "Release",

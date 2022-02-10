@@ -15,9 +15,9 @@ int main(int argc, char* argv[]) {
     if (argc < 2){
         mainMenu();
     }else if (argc >= 3){ //If lab name is given then generate default structure without templates
-        int labNum = atoi(argv[1]);
+        std::string labNum = argv[1];
         int qNum = atoi(argv[2]);
-        if (labNum != 0 && qNum != 0){
+        if (qNum != 0){
             Lab* lab = new Lab(labNum, qNum);
             
             if (!lab->destExists())
@@ -50,7 +50,7 @@ void mainMenu(){
 
 void buildLab(Lab* lab) {
     //Define vars to enter into lab object
-    int labNum;
+    std::string labNum;
     int qNum;
     std::string tPath;
     std::string prefix;
@@ -114,7 +114,7 @@ void buildLab(Lab* lab) {
             confirmDel = std::tolower(confirmDel);
 
             //Keep asking till vaild option is entered
-            while (std::cin.fail() || confirmDel != 'n' || confirmDel != 'y'){
+            while (std::cin.fail() && confirmDel != 'n' && confirmDel != 'y'){
                 std::cout << "Choose valid option!\n";
                 cleanCin();
                 std::cin >> confirmDel;
@@ -152,7 +152,7 @@ void buildLab(Lab* lab) {
     defOpt = std::tolower(defOpt);
 
     //Keep asking until valid option entered
-    while (std::cin.fail() || defOpt != 'n' || defOpt != 'y'){
+    while (std::cin.fail() && defOpt != 'n' && defOpt != 'y'){
         std::cout << "Continue with optimized defaults? (Y/N): ";
         cleanCin();
         std::cin >> defOpt;
@@ -174,16 +174,17 @@ void buildLab(Lab* lab) {
         lab->setPrefix(prefix);
         std::cout << "\n";
 
-        std::cout << "Enter path to lab parent directory: ";
+        std::cout << "Enter path to lab parent directory ('.' for current directory): ";
         std::cin >> pDir;
 
         // Keep asking until valid string entry
-        while (std::cin.fail() || !fs::exists(pDir)) {
+        while (std::cin.fail() && !fs::exists(pDir)) {
             if (!fs::exists(pDir)) {
                 std::cout << "Entered directory doesn't exist!\n";
             }
 
-            std::cout << "Enter path to lab parent directory: ";
+            std::cout << "Enter path to lab parent directory ('.' for "
+                         "current directory): ";
             cleanCin();
             std::cin >> pDir;
         }
@@ -191,15 +192,15 @@ void buildLab(Lab* lab) {
         std::cout << "\n";
 
         // Keep asking until valid string entry
-        std::cout << "Enter path to template file including C++ file: ";
+        std::cout << "Enter full path to C++ template file: ";
         std::cin >> tPath;
 
-        while (std::cin.fail() || !fs::exists(tPath)) {
+        while (std::cin.fail() && !fs::exists(tPath)) {
             if (!fs::exists(tPath)){
                 std::cout << "Entered template file doesn't exist!\n";
             }
 
-            std::cout << "Enter path to template file including C++ file: ";
+            std::cout << "Enter full path to C++ template file: ";
             cleanCin();
             std::cin >> tPath;
         }

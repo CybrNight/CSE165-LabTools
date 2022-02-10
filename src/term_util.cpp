@@ -3,7 +3,7 @@
 #include <iostream>
 
 void clearConsole() {
-    std::system("cls");
+    std::system("clear");
 }
 
 void cleanCin() {

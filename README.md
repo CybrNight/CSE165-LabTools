@@ -25,7 +25,7 @@ Sorry about the zipped tar.gz, GitHub automatically zips up all artifacts on dow
 - Ubuntu
 	- Other Debian based distros should work since I only use the standard C/C++ libraries
 	- Non-Debian distros like Arch should also be compatible for the same reason
-- MacOS 10.15 Catalina or higher (blame Apple not me)
+- MacOS 10.15 Catalina or higher
 - Sorry Windows users, but Microsoft makes things difficult
 
 ## Usage

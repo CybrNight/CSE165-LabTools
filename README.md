@@ -11,7 +11,7 @@ Tools used for generating lab structure and grading labs for CSE165 at UC Merced
 ## Features
  - Auto generate lab folder structure per the professor's requirements
  - Auto build and run all files for lab (*coming soon*)
- - Grade labs based on user-defined test cases (*coming soon*)
+ - Auto run all lab questions with user-defined test cases (*coming soon*)
 
 ## Download
 [![latest-dev](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/latest_dev.yml/badge.svg)](https://github.com/CybrNight/CSE165-LabTools/actions/workflows/latest.yml)

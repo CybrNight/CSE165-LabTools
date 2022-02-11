@@ -2,11 +2,11 @@
 #include <algorithm>
 #include <iostream>
 
-void clearConsole() {
+void term::clearConsole() {
     std::system("clear");
 }
 
-void cleanCin() {
+void term::cleanCin() {
     std::cin.clear();
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }

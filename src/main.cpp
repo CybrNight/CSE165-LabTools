@@ -1,12 +1,13 @@
 #include <lab.h>
 #include <term_util.h>
+#include <files.h>
 #include <algorithm>
 #include <cstdlib>
 
 void mainMenu();
 void printMenu();
 void printCredits();
-void buildLab(Lab* lab);
+void buildLab(Lab lab);
 
 namespace fs = std::filesystem;
 
@@ -18,10 +19,10 @@ int main(int argc, char* argv[]) {
         std::string labNum = argv[1];
         int qNum = atoi(argv[2]);
         if (qNum != 0){
-            Lab* lab = new Lab(labNum, qNum);
+            Lab lab(labNum, qNum);
             
-            if (!lab->destExists())
-                lab->generateFolders();
+            if (!lab.destExists())
+                files::generateFolders(lab);
         }
     }
 }
@@ -32,23 +33,20 @@ void mainMenu(){
     printMenu();
     std::cin >> choice;
 
-    clearConsole();
+    term::clearConsole();
 
-    Lab* lab;
+    Lab lab;
 
     switch (choice){
         case 1:
-            lab = new Lab();
             buildLab(lab);
             break;
         default:
             exit (EXIT_SUCCESS);
     }
-
-    delete lab;
 }
 
-void buildLab(Lab* lab) {
+void buildLab(Lab lab) {
     //Define vars to enter into lab object
     std::string labNum;
     int qNum;
@@ -79,18 +77,18 @@ void buildLab(Lab* lab) {
     //Keep asking until valid option given
     while (std::cin.fail()){
         std::cout << "Enter lab number: ";
-        cleanCin();
+        term::cleanCin();
         std::cin >> labNum;
     }
 
-    lab->setLabNum(labNum);
+    lab.setLabNum(labNum);
 
     //Check if destination exists, if it does ask to delete it
     std::string delOpt;
     char confirmDel;
-    if (lab->destExists()) {
+    if (lab.destExists()) {
         //Ask if user action for folder
-        std::cout << "Destination path (" << lab->getFullPath()
+        std::cout << "Destination path (" << lab.getFullPath()
                   << ") already exists.\n";
         std::cout << "I)gnore\nD)elete\nA)bort\n";
         std::cin >> delOpt;
@@ -98,17 +96,17 @@ void buildLab(Lab* lab) {
         //Keep asking til valid entry is entered
         while (std::cin.fail()) {
             std::cout << "Choose valid option!\n";
-            cleanCin();
+            term::cleanCin();
             std::cin >> delOpt;
         }
 
         //Convert delOpt to lowercase
-        transform(delOpt.begin(), delOpt.end(), delOpt.begin(), ::tolower);
+        std::transform(delOpt.begin(), delOpt.end(), delOpt.begin(), ::tolower);
 
         //If delete option is selected confirm with user that they actually
         //want to delete it
         if (delOpt.compare("d") || delOpt.compare("delete")) {
-            std::cout << "\nWARNING!!! DIRECTORY " << lab->getFullPath() << " "
+            std::cout << "\nWARNING!!! DIRECTORY " << lab.getFullPath() << " "
             "WILL BE PERMANATELY DELETED!\n Are you sure? (Y/N): ";
             std::cin >> confirmDel;
             confirmDel = std::tolower(confirmDel);
@@ -116,15 +114,15 @@ void buildLab(Lab* lab) {
             //Keep asking till vaild option is entered
             while (std::cin.fail() && confirmDel != 'n' && confirmDel != 'y'){
                 std::cout << "Choose valid option!\n";
-                cleanCin();
+                term::cleanCin();
                 std::cin >> confirmDel;
                 confirmDel = std::tolower(confirmDel);
             }
 
             //If yes then delete directory
             if (confirmDel == 'y'){
-                std::uintmax_t n = fs::remove_all(lab->getFullPath());
-                std::cout << "Deleted directory " << lab->getFullPath() << " folder containing " << n
+                std::uintmax_t n = fs::remove_all(lab.getFullPath());
+                std::cout << "Deleted directory " << lab.getFullPath() << " folder containing " << n
                         << " files.\n\n";
             }
         } else if (delOpt.compare("a") || delOpt.compare("abort")) {
@@ -138,12 +136,12 @@ void buildLab(Lab* lab) {
     //Keep asking until valid option given
     while (std::cin.fail()) {
         std::cout << "Enter question count: ";
-        cleanCin();
+        term::cleanCin();
         std::cin >> qNum;
     }
-    lab->setQNum(qNum);
+    lab.setQNum(qNum);
     std::cout << "\n";
-    lab->printDetails();
+    lab.printDetails();
     
     //Ask user if they want to continue with defaults
     char defOpt;
@@ -154,7 +152,7 @@ void buildLab(Lab* lab) {
     //Keep asking until valid option entered
     while (defOpt != 'n' && defOpt != 'y'){
         std::cout << "Continue with optimized defaults? (Y/N): ";
-        cleanCin();
+        term::cleanCin();
         std::cin >> defOpt;
         defOpt = std::tolower(defOpt);
     }
@@ -167,11 +165,11 @@ void buildLab(Lab* lab) {
         //Keep asking until valid string entry
         while (std::cin.fail()) {
             std::cout << "Enter C++ file prefix: ";
-            cleanCin();
+            term::cleanCin();
             std::cin >> prefix;
         }
 
-        lab->setPrefix(prefix);
+        lab.setPrefix(prefix);
         std::cout << "\n";
 
         std::cout << "Enter path to lab parent directory ('.' for current directory): ";
@@ -185,10 +183,10 @@ void buildLab(Lab* lab) {
 
             std::cout << "Enter path to lab parent directory ('.' for "
                          "current directory): ";
-            cleanCin();
+            term::cleanCin();
             std::cin >> pDir;
         }
-        lab->setPDir(pDir);
+        lab.setPDir(pDir);
         std::cout << "\n";
 
         // Keep asking until valid string entry
@@ -201,18 +199,18 @@ void buildLab(Lab* lab) {
             }
 
             std::cout << "Enter full path to C++ template file: ";
-            cleanCin();
+            term::cleanCin();
             std::cin >> tPath;
         }
-        lab->setTemplate(tPath);
+        lab.setTemplate(tPath);
         std::cout << "\n";
     }
 
     //TODO: Print out plan for program for user to agree
-    lab->printFSLayout();
+    files::printFSLayout(lab);
 
     char choice;
-    std::cout << "Will create the above file structure at (" << lab->getPDir()
+    std::cout << "Will create the above file structure at (" << lab.getPDir()
             << ")\n";
     std::cout << "Continue with operation? (Y/N): ";
     std::cin >> choice;
@@ -220,8 +218,8 @@ void buildLab(Lab* lab) {
     //Keep asking until valid option is entered
     while (std::cin.fail()){
         std::cout << "Will create the above file structure at ("
-                  << lab->getPDir() << ")\n";
-        cleanCin();
+                  << lab.getPDir() << ")\n";
+        term::cleanCin();
         std::cin >> choice;
     }
 
@@ -234,7 +232,7 @@ void buildLab(Lab* lab) {
 
     //Generate folders
     try {
-        lab->generateFolders();
+        files::generateFolders(lab);
         std::cout << "Files created successfully" << "\n";
     }catch (int e){
         std::cout << "Failed to create lab files. Returned " << e << "\n";

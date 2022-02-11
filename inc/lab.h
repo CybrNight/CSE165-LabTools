@@ -25,8 +25,6 @@ class Lab {
         Lab(std::string labNum, int qNum);
 
         void printDetails(); //Print all details
-        void printFSLayout(); //Print filesystem layout
-        int generateFolders(); //Generates all folders for lab
         bool destExists(); //Checks if lab's location is taken
 
         void setLabNum(std::string labNum);
@@ -37,10 +35,15 @@ class Lab {
         void setTemplate(std::string tPath);
 
         std::string getLabNum();
+        std::string getPrefix();
+
         int getQNum();
         fs::path getPDir();
         fs::path getFullPath();
         fs::path getTemplate();
+
+        bool getUsePrefix();
+        bool getUseTemplate();
 };
 
 #endif

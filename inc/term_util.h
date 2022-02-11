@@ -1,7 +1,9 @@
 #ifndef TERM_UTIL
 #define TERM_UTIL
 
-void clearConsole();
-void cleanCin();
+namespace term{
+    void clearConsole();
+    void cleanCin();
+}
 
 #endif

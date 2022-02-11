@@ -34,6 +34,42 @@ Lab::Lab(std::string labNum, int qNum) {
     }
 }
 
+void Lab::buildQuestion(int question /*=INT_MAX*/){
+    std::string folder = fullPath.u8string() + "/";
+    std::string cmd;
+    std::string qStr;
+
+    if (question == INT_MAX) {
+        for (int i = 1; i <= qNum; i++){
+            qStr = std::to_string(i);
+            cmd = "g++ " + folder + qStr + "/*.cpp -o " + folder + qStr + "/a.out";
+
+            std::system(cmd.c_str());
+        }
+    }
+    else {
+        qStr = std::to_string(question);
+        cmd = "g++ " + folder + qStr + "/*.cpp -o " + folder + qStr + "/a.out";
+        std::system(cmd.c_str());
+    }
+}
+
+void Lab::runQuestion(int question /*=INT_MAX*/){
+    std::string folder = fullPath.u8string() + "/";
+    std::string cmd;
+
+    if (question == INT_MAX){
+        for (int i = 1; i <= qNum; i++) {
+            cmd = "./" + folder + std::to_string(i) + "/a.out";
+
+            std::system(cmd.c_str());
+        }
+    }else{
+        cmd = "." + folder +std::to_string(question) + "/a.out";
+        std::system(cmd.c_str());
+    }
+}
+
 void Lab::updateFullPath() { fullPath = pDir.u8string() + "/Lab" + labNum; }
 
 void Lab::printDetails() {
@@ -53,13 +89,9 @@ void Lab::printDetails() {
 
 bool Lab::destExists() { return fs::exists(fullPath); }
 
-std::string Lab::getLabNum(){
-    return labNum;
-}
+std::string Lab::getLabNum() { return labNum; }
 
-int Lab::getQNum(){
-    return qNum;
-}
+int Lab::getQNum() { return qNum; }
 
 bool Lab::getUseTemplate() { return useTemplate; }
 

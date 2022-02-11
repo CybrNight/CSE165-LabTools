@@ -3,9 +3,9 @@
 
 #define FILES
 
-namespace files{
-    void printFSLayout(Lab lab);
-    int generateFolders(Lab lab);
-}
+namespace files {
+void printFSLayout(Lab lab);
+int generateFolders(Lab lab);
+}  // namespace files
 
 #endif
